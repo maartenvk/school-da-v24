@@ -69,7 +69,7 @@ namespace school_ad_v24.les1
                 for (int col = 0; col < width; col++)
                 {
                     bool on = board[row, col];
-                    Console.Write(on ? '#' : ' ');
+                    Console.Write(on ? '█' : ' ');
                 }
 
                 Console.WriteLine();
