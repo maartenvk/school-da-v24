@@ -43,3 +43,8 @@ O(N\^3 log(N))
 a. O(N) groeit minder snel dan O(N\^2)
 b. O(logN) plateaut
 c. log(N) plateaut, N gaat recht, NlogN gaat hoger dan N
+
+# opgave 8
+b. log(1024) = 10, log(2048) = 11
+c. x = 2\^4 = 16
+d. x = 2\^10 = 1024
