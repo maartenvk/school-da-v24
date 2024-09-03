@@ -48,3 +48,8 @@ c. log(N) plateaut, N gaat recht, NlogN gaat hoger dan N
 b. log(1024) = 10, log(2048) = 11  
 c. x = 2\^4 = 16  
 d. x = 2\^10 = 1024  
+
+# opgave 9
+a. x\^2 = 10x. doorkruist op x = 10. x\^2 = 1000x doorkruist op x = 1000. alpha moet minimaal x zijn.  
+b. `x = e^(-W_(-1)(-log(2)/100))` = approx x=996  
+c. x\^2 = 100\*xlog(x) = `x = e^(-W_(-1)(-log(2)/100))` = approx x=996
