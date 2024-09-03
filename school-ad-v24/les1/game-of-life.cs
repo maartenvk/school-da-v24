@@ -11,11 +11,11 @@ namespace school_ad_v24.les1
     {
         bool[,] board = new bool[height, width];
         bool[,] buffer = new bool[height, width];
-        private readonly int width = width;
-        private readonly int height = height;
+        protected readonly int width = width;
+        protected readonly int height = height;
 
         public delegate bool Rule(bool alive, int neighborCount);
-        private Rule applyRule = defaultRule;
+        protected Rule applyRule = defaultRule;
 
         public static readonly Rule defaultRule = (bool on, int nc) =>
         {
@@ -51,12 +51,12 @@ namespace school_ad_v24.les1
             (buffer, board) = (board, buffer);
         }
 
-        private bool IsValidCoordinate(int row, int col)
+        protected bool IsValidCoordinate(int row, int col)
         {
             return row >= 0 && col >= 0 && row < height && col < width;
         }
 
-        private int NeighborCount(int row, int col)
+        protected int NeighborCount(int row, int col)
         {
             int[] row_positions = [-1, -1, -1, 0, 1, 1, 1, 0];
             int[] col_positions = [-1, 0, 1, 1, 1, 0, -1, -1];
