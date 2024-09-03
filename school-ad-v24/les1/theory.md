@@ -38,3 +38,8 @@ x := N
 
 O(N\^3 \* log(N))
 O(N\^3 log(N))
+
+# opgave 7
+a. O(N) groeit minder snel dan O(N\^2)
+b. O(logN) plateaut
+c. log(N) plateaut, N gaat recht, NlogN gaat hoger dan N
