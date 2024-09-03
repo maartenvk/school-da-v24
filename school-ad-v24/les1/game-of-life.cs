@@ -93,7 +93,7 @@ namespace school_ad_v24.les1
             {
                 PrintState();
                 Step();
-                Thread.Sleep(32);
+                Thread.Sleep(41);
             }
         }
     }
