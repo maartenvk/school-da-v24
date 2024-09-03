@@ -76,16 +76,14 @@ namespace school_ad_v24.les1
             }
         }
 
-        public void PutGlider()
+        public void PutGlider(int offset = 2)
         {
             int[] rows = [0, 1, 1, 2, 2];
             int[] cols = [2, 0, 2, 1, 2];
 
-            int offset = 2;
-
-            for (int i = 0; i < rows.Length; i++)
+            foreach ((int row, int col) in rows.Zip(cols))
             {
-                board[offset + rows[i], offset + cols[i]] = true;
+                board[offset + row, offset + col] = true;
             }
         }
 
