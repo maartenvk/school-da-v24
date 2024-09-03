@@ -27,3 +27,14 @@ e. O(N\^3)
 f. O(N\^2)
 g. O(N\^5)
 h. O(logN)
+
+# opgave 6
+main: O(N\^3)
+functie: O(y)
+functie2: 3log(x) = log(x)
+
+y := N\^2 - i
+x := N
+
+O(N\^3 \* log(N))
+O(N\^3 log(N))
