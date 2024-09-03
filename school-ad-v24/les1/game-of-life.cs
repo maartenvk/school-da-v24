@@ -76,7 +76,7 @@ namespace school_ad_v24.les1
             }
         }
 
-        public void PutSample()
+        public void PutGlider()
         {
             int[] rows = [0, 1, 1, 2, 2];
             int[] cols = [2, 0, 2, 1, 2];

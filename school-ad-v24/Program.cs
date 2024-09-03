@@ -3,5 +3,5 @@
 // Console.WriteLine(string.Join(',', Sieve_of_eratosthenes.Solve(10)));
 
 Game_of_life gol = new(40, 25);
-gol.PutSample();
+gol.PutGlider();
 gol.Play();
