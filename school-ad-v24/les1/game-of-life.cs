@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,28 @@ namespace school_ad_v24.les1
         private readonly int width = width;
         private readonly int height = height;
 
+        public delegate bool Rule(bool alive, int neighborCount);
+        private Rule applyRule = defaultRule;
+
+        public static readonly Rule defaultRule = (bool on, int nc) =>
+        {
+            if (on && (nc < 2 || nc > 3))
+            {
+                return false;
+            }
+            else if (!on && nc == 3)
+            {
+                return true;
+            }
+
+            return on;
+        };
+
+        public void SetRule(Rule rule)
+        {
+            applyRule = rule;
+        }
+
         public void Step()
         {
             for (int row = 0; row < height; row++)
@@ -21,16 +44,7 @@ namespace school_ad_v24.les1
                 {
                     bool on = board[row, col];
                     int nc = NeighborCount(row, col);
-                    buffer[row, col] = board[row, col];
-
-                    if (on && (nc < 2 || nc > 3))
-                    {
-                        buffer[row, col] = false;
-                    }
-                    else if (!on && nc == 3)
-                    {
-                        buffer[row, col] = true;
-                    }
+                    buffer[row, col] = applyRule(on, nc);
                 }
             }
 
