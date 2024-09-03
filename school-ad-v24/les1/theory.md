@@ -17,3 +17,13 @@ c. O(N\^3): t(N) = k\*N\^3. t(100) = 0.5ms. dus 0.5 = k \* 100\^3. k = 0.5 / 100
 
 # opgave 4
 O(N)
+
+# opgave 5
+a. O(N)
+b. O(N/2) = O(N)
+c. O(N\^2)
+d. O(N) + O(N) = O(N)
+e. O(N\^3)
+f. O(N\^2)
+g. O(N\^5)
+h. O(logN)
