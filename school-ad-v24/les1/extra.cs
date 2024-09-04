@@ -126,8 +126,25 @@ namespace school_ad_v24.les1
             RunFor(quality, list);
         }
 
+        public void RunStep(int quality, int from, int to, int step)
+        {
+            Contract.Assert(step > 0);
+            Contract.Assert(to > from);
+
+            int length = (to - from) / step;
+
+            var Ns = Enumerable.Repeat(0, length).Select((_, i) =>
+            {
+                return from + i * step;
+            }).ToArray();
+
+            RunFor(quality, Ns);
+        }
+
         public void RunFor(int quality, int[] Ns)
         {
+            Contract.Assert(quality > 0);
+            
             this.Ns = Ns;
             Quality = quality;
             Data = new long[Ns.Length];
