@@ -169,14 +169,23 @@ namespace school_ad_v24.les1
             return obj;
         }
 
-        public void Play()
+        public void Play(bool benchmark = false)
         {
             int i = 0;
             while (true)
             {
-                PrintState();
+                if (!benchmark)
+                {
+                    PrintState();
+                }
+
                 Step();
-                Thread.Sleep(200); // 5 FPS
+
+                if (!benchmark)
+                {
+                    Thread.Sleep(200); // 5 FPS
+                }
+
                 i++;
                 if (lastTickWasEqual)
                 {
@@ -192,7 +201,11 @@ namespace school_ad_v24.les1
                         }
                     }
 
-                    Console.WriteLine($"{occupiedCount} chairs are occupied.");
+                    if (!benchmark)
+                    {
+                        Console.WriteLine($"{occupiedCount} chairs are occupied.");
+                    }
+
                     break;
                 }
             }

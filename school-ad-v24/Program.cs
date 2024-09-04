@@ -22,9 +22,20 @@ L.LLLLL.LL
 
 //FizzBuzz.PrintRange(1, 100);
 
-var array = ArrayUtils.Populate(25, 0.0, 100.0);
-int maxi = ArrayUtils.MaxIndex(array);
-var max = ArrayUtils.MaxValue(array);
+//var array = ArrayUtils.Populate(25, 0.0, 100.0);
+//int maxi = ArrayUtils.MaxIndex(array);
+//var max = ArrayUtils.MaxValue(array);
 
-Console.WriteLine(string.Join(',', array));
-Console.WriteLine($"max: {maxi}, is: {max}");
+//Console.WriteLine(string.Join(',', array));
+//Console.WriteLine($"max: {maxi}, is: {max}");
+
+Benchmarker benchmarker = new((int _) =>
+{
+    aocGol.Play(benchmark: true);
+}, n =>
+{
+    aocGol = new Aoc_game_of_life(n, n);
+    return 0;
+});
+
+benchmarker.RunFor(10, [1, 10, 100, 125, 250, 400, 500, 750, 1000]);

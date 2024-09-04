@@ -92,32 +92,67 @@ namespace school_ad_v24.les1
         }
     }
 
-    class Benchmarker<T> where T: Delegate
+    class Benchmarker
     {
         private readonly Stopwatch stopwatch = new();
-        private readonly T function;
+        private readonly Delegate function;
+        private readonly Func<int, dynamic> paramsSupplier;
 
-        public Benchmarker(T function)
+        public int Quality { get; private set; }
+        public int[] Ns { get; private set; }
+        public long[] Data { get; private set; }
+
+        public Benchmarker(Delegate function, Func<int, dynamic> paramsSupplier)
         {
             this.function = function;
+            this.paramsSupplier = paramsSupplier;
         }
 
-        public void InvokeFunction(params object?[]? args)
+        private void InvokeFunction(dynamic args)
         {
             _ = function.DynamicInvoke(args);
         }
 
-        public void Run(int quality)
+        public void Run(int quality, int fromN, int toN)
         {
-            long[] elapsed = new long[quality];
+            RunFor(quality, Enumerable.Range(fromN, (toN - fromN) + 1).ToArray());
+        }
 
-            for (int i = 0; i < quality; i++)
+        public void RunFor(int quality, int[] Ns)
+        {
+            this.Ns = Ns;
+            Quality = quality;
+            Data = new long[Ns.Length];
+
+            int nIndex = 0;
+            foreach (int n in Ns)
             {
-                stopwatch.Restart();
-                InvokeFunction();
-                
-                stopwatch.Stop();
-                elapsed[i] = stopwatch.ElapsedTicks;
+                Console.Write($"O({n}) .. ");
+
+                long[] data = new long[quality];
+                for (int i = 0; i < quality; i++)
+                {
+                    var args = paramsSupplier(n);
+
+                    stopwatch.Restart();
+                    InvokeFunction(args);
+
+                    stopwatch.Stop();
+                    data[i] = stopwatch.ElapsedMilliseconds;
+                }
+
+                long ms = data.Sum() / quality;
+                Data[nIndex++] = ms;
+                Console.WriteLine($"{ms} ms");
+            }
+        }
+
+        public void PrintBenchmarkResults()
+        {
+            long[] mss = Data;
+            foreach ((int N, long ms) in Ns.Zip(mss))
+            {
+                Console.WriteLine($"O({N}): {ms} ms");
             }
         }
     }
