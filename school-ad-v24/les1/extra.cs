@@ -67,7 +67,7 @@ namespace school_ad_v24.les1
 
         public static int MaxIndex<T>(T[] array) where T: INumber<T>, IMinMaxValue<T>
         {
-            Contract.Assert(array.Length >= 0);
+            Contract.Assert(array.Length > 0);
             
             int max_index = 0;
             T highest = T.MinValue;
@@ -86,9 +86,23 @@ namespace school_ad_v24.les1
 
         public static T MaxValue<T>(T[] array) where T: INumber<T>, IMinMaxValue<T>
         {
-            Contract.Assert(array.Length >= 0);
+            Contract.Assert(array.Length > 0);
 
             return array.Max() ?? T.MinValue;
+        }
+
+        public static T CumulativeSum<T>(T[] array, int index) where T: INumber<T>, IMinMaxValue<T>
+        {
+            Contract.Assert(index >= 0);
+            Contract.Assert(index < array.Length);
+
+            T sum = T.Zero;
+            for (int i = 0; i <= index; i++)
+            {
+                sum += array[i];
+            }
+
+            return sum;
         }
     }
 

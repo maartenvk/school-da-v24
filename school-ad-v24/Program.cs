@@ -29,14 +29,17 @@ L.LLLLL.LL
 //Console.WriteLine(string.Join(',', array));
 //Console.WriteLine($"max: {maxi}, is: {max}");
 
-Benchmarker benchmarker = new((int _) =>
-{
-    aocGol.Play(benchmark: true);
-}, n =>
-{
-    aocGol = new(n, n);
-    return 0;
-});
+//Benchmarker benchmarker = new((int _) =>
+//{
+//    aocGol.Play(benchmark: true);
+//}, n =>
+//{
+//    aocGol = new(n, n);
+//    return 0;
+//});
 
-benchmarker.RunStep(2, 1, 100, 1);
-benchmarker.PrintAsCopyable();
+//benchmarker.RunStep(2, 1, 100, 1);
+//benchmarker.PrintAsCopyable();
+
+int cs = ArrayUtils.CumulativeSum([4, 5, 3, 2, 1, 1, 7, 0, 10], 5);
+Console.WriteLine(cs);
