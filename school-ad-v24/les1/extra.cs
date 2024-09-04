@@ -104,6 +104,36 @@ namespace school_ad_v24.les1
 
             return sum;
         }
+
+        public static double[] MovingAverage(double[] array, int n)
+        {
+            Contract.Assert(n > 0);
+            Contract.Assert(array.Length > 0);
+
+            double[] output = new double[array.Length];
+
+            int left = 0;
+            int right = 0;
+
+            while (right < array.Length)
+            {
+                int length = right - left + 1;
+                double sum = 0;
+                for (int i = left; i <= right; i++)
+                {
+                    sum += array[i];
+                }
+
+                sum /= length;
+                output[right] = sum;
+
+                // Proceed to next iteration, and clamp indices to [0..]
+                right++;
+                left = Math.Max(right - n + 1, 0);
+            }
+
+            return output;
+        }
     }
 
     class Benchmarker
@@ -125,6 +155,12 @@ namespace school_ad_v24.les1
         private void InvokeFunction(dynamic args)
         {
             _ = function.DynamicInvoke(args);
+        }
+
+        public static void Initialize(Action initializer)
+        {
+            Console.WriteLine("Initializing..");
+            initializer.Invoke();
         }
 
         public void Run(int quality, int fromN, int toN)

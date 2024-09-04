@@ -41,5 +41,22 @@ L.LLLLL.LL
 //benchmarker.RunStep(2, 1, 100, 1);
 //benchmarker.PrintAsCopyable();
 
-int cs = ArrayUtils.CumulativeSum([4, 5, 3, 2, 1, 1, 7, 0, 10], 5);
-Console.WriteLine(cs);
+//int[] array = [];
+//Benchmarker bm = new((int i) =>
+//{
+//    ArrayUtils.CumulativeSum(array, i);
+//}, n =>
+//{
+//    return Random.Shared.Next(0, n);
+//});
+
+//Benchmarker.Initialize(() =>
+//{
+//    array = ArrayUtils.Populate(1073741824, 0, 9999);
+//});
+
+//bm.RunForTwos(5, 30);
+//bm.PrintAsCopyable();
+
+var output = ArrayUtils.MovingAverage((double[])[4, 5, 3, 2, 1, 1, 4, 8, 10, 12, 15, 18, 20], 4);
+Console.WriteLine(string.Join(',', output));
