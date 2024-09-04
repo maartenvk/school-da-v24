@@ -38,5 +38,5 @@ Benchmarker benchmarker = new((int _) =>
     return 0;
 });
 
-benchmarker.RunForTwos(10, 10);
+benchmarker.RunForTwos(1, 11);
 benchmarker.PrintAsCopyable();
