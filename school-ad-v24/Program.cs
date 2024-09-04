@@ -58,5 +58,15 @@ L.LLLLL.LL
 //bm.RunForTwos(5, 30);
 //bm.PrintAsCopyable();
 
-var output = ArrayUtils.MovingAverage([4, 5, 3, 2, 1, 1, 4, 8, 10, 12, 15, 18, 20], 4);
+//var output = ArrayUtils.MovingAverage([4, 5, 3, 2, 1, 1, 4, 8, 10, 12, 15, 18, 20], 4);
+//Console.WriteLine(string.Join(',', output));
+
+
+var a = ArrayUtils.Populate(10, 0, 100);
+var b = ArrayUtils.Populate(10, 0, 100);
+
+Array.Sort(a);
+Array.Sort(b);
+
+var output = ArrayUtils.MergeArrays(a, b);
 Console.WriteLine(string.Join(',', output));

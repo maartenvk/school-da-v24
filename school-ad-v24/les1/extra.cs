@@ -166,6 +166,35 @@ namespace school_ad_v24.les1
 
             return output;
         }
+
+        public static T[] MergeArrays<T>(T[] a, T[] b) where T: INumber<T>, IComparable<T>, IMinMaxValue<T>
+        {
+            T[] merged = new T[a.Length + b.Length];
+
+            int l = 0;
+            int r = 0;
+
+            for (int i = 0; i < merged.Length; i++)
+            {
+                T x = l < a.Length ? a[l] : T.MaxValue;
+                T y = r < b.Length ? b[r] : T.MaxValue;
+
+                T lowest = x;
+                if (x < y)
+                {
+                    l++;
+                }
+                else
+                {
+                    r++;
+                    lowest = y;
+                }
+
+                merged[i] = lowest;
+            }
+
+            return merged;
+        }
     }
 
     class Benchmarker
