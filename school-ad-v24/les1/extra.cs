@@ -118,6 +118,14 @@ namespace school_ad_v24.les1
             RunFor(quality, Enumerable.Range(fromN, (toN - fromN) + 1).ToArray());
         }
 
+        public void RunForTwos(int quality, int count)
+        {
+            Contract.Assert(count > 0);
+            var list = Enumerable.Range(1, count).Select((n) => (int)Math.Pow(2, n)).ToArray();
+
+            RunFor(quality, list);
+        }
+
         public void RunFor(int quality, int[] Ns)
         {
             this.Ns = Ns;
@@ -127,7 +135,7 @@ namespace school_ad_v24.les1
             int nIndex = 0;
             foreach (int n in Ns)
             {
-                Console.Write($"O({n}) .. ");
+                Console.Write($"O({n}) ");
 
                 long[] data = new long[quality];
                 for (int i = 0; i < quality; i++)
@@ -139,21 +147,18 @@ namespace school_ad_v24.les1
 
                     stopwatch.Stop();
                     data[i] = stopwatch.ElapsedMilliseconds;
+                    Console.Write('.');
                 }
 
                 long ms = data.Sum() / quality;
                 Data[nIndex++] = ms;
-                Console.WriteLine($"{ms} ms");
+                Console.WriteLine($" {ms} ms");
             }
         }
 
-        public void PrintBenchmarkResults()
+        public void PrintAsCopyable()
         {
-            long[] mss = Data;
-            foreach ((int N, long ms) in Ns.Zip(mss))
-            {
-                Console.WriteLine($"O({N}): {ms} ms");
-            }
+            Console.WriteLine('[' + string.Join(',', Data) + ']');
         }
     }
 }

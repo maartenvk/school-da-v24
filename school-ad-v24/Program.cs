@@ -34,8 +34,9 @@ Benchmarker benchmarker = new((int _) =>
     aocGol.Play(benchmark: true);
 }, n =>
 {
-    aocGol = new Aoc_game_of_life(n, n);
+    aocGol = new(n, n);
     return 0;
 });
 
-benchmarker.RunFor(10, [1, 10, 100, 125, 250, 400, 500, 750, 1000]);
+benchmarker.RunForTwos(10, 10);
+benchmarker.PrintAsCopyable();
