@@ -18,4 +18,13 @@ LLLLLLLLLL
 L.LLLLLL.L
 L.LLLLL.LL
 """);
-aocGol.Play();
+// aocGol.Play();
+
+//FizzBuzz.PrintRange(1, 100);
+
+var array = ArrayUtils.Populate(25, 0.0, 100.0);
+int maxi = ArrayUtils.MaxIndex(array);
+var max = ArrayUtils.MaxValue(array);
+
+Console.WriteLine(string.Join(',', array));
+Console.WriteLine($"max: {maxi}, is: {max}");
