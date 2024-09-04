@@ -105,7 +105,7 @@ namespace school_ad_v24.les1
             return sum;
         }
 
-        public static double[] MovingAverage(double[] array, int n)
+        public static double[] MovingAverageNaive(double[] array, int n)
         {
             Contract.Assert(n > 0);
             Contract.Assert(array.Length > 0);
@@ -126,6 +126,38 @@ namespace school_ad_v24.les1
 
                 sum /= length;
                 output[right] = sum;
+
+                // Proceed to next iteration, and clamp indices to [0..]
+                right++;
+                left = Math.Max(right - n + 1, 0);
+            }
+
+            return output;
+        }
+
+        public static double[] MovingAverage(double[] array, int n)
+        {
+            Contract.Assert(n > 0);
+            Contract.Assert(array.Length > 0);
+
+            double[] output = new double[array.Length];
+
+            int left = 0;
+            int right = 0;
+
+            double sum = 0;
+
+            while (right < array.Length)
+            {
+                int length = right - left + 1;
+                sum += array[right];
+
+                if (left != 0)
+                {
+                    sum -= array[left - 1];
+                }
+
+                output[right] = sum / length;
 
                 // Proceed to next iteration, and clamp indices to [0..]
                 right++;
