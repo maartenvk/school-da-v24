@@ -58,5 +58,5 @@ L.LLLLL.LL
 //bm.RunForTwos(5, 30);
 //bm.PrintAsCopyable();
 
-var output = ArrayUtils.MovingAverage((double[])[4, 5, 3, 2, 1, 1, 4, 8, 10, 12, 15, 18, 20], 4);
+var output = ArrayUtils.MovingAverage([4, 5, 3, 2, 1, 1, 4, 8, 10, 12, 15, 18, 20], 4);
 Console.WriteLine(string.Join(',', output));
