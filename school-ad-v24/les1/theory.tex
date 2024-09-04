@@ -1,0 +1,111 @@
+\documentclass[12pt,a4paper]{article}
+\title{Les 1 huiswerk}
+\author{Maarten}
+\usepackage{amsmath}
+\begin{document}
+\maketitle
+\section{Opgave 1}
+\begin{itemize}
+\item $\log_2(N) + 0.01N$
+\item $2\log_2(N)$
+\item $0.5N \log_2(0.5N)$
+\item $3N^2 + 4N$
+\item $N^3 + 801N$
+
+\end{itemize}
+\section{Opgave 2}
+\begin{itemize}
+\item[A.] $O(N)$:
+\[\frac{500}{100} = 5\]
+\[0.4 \cdot 5 = 2 \text{ms}\]
+
+\item[B.] $O(N^2)$:
+\[100 \cdot 100 \text{ operations}\]
+\[500 \cdot 500 = 250\,000 \text{ operations}\]
+\[\frac{250\,000}{10\,000} = 25\]
+\[25 \cdot 0.4 = 10\text{ms}\]
+
+\item[C.] $O(N^3)$:
+\[100^3 = 1\,000\,000\]
+\[500^3 = 125\,000\,000\]
+\[\frac{125\,000\,000}{1\,000\,000} = 125\]
+\[125 \cdot 0.4 = 50\text{ms}\]
+
+\end{itemize}
+\section{Opgave 3}
+With $60\,000\text{ms} = 60$s
+\begin{itemize}
+\item[A.] $O(N)$:
+\[t(N) = k \cdot N\]
+\[t(100) = 0.5\text{ms}\]
+\[0.5 = k \cdot 100\]
+\[k = \frac{0.5}{100} = 0.005\]
+\[60\,000 = 0.005 \cdot N\]
+\[N = \frac{60\,000}{0.005} = 12\,000\,000 \text{ operations}\]
+
+\item[B.] $O(N^2)$:
+\[t(N) = k \cdot N^2\]
+\[t(100) = 0.5\text{ms}\]
+\[0.5 = k \cdot 100^2\]
+\[k = \frac{0.5}{10\,000} = 5 \times 10^{-5}\]
+\[60\,000 = 5 \times 10^{-5} \cdot N^2\]
+\[N^2 = \frac{60\,000}{5 \times 10^{-5}} = 1\,200\,000\,000\]
+\[N = \sqrt{1\,200\,000\,000} = 34\,641 \text{ operations}\]
+
+\item[C.] $O(N^3)$:
+\[t(N) = k \cdot N^3\]
+\[t(100) = 0.5\text{ms}\]
+\[0.5 = k \cdot 100^3\]
+\[k = \frac{0.5}{100^3} = 5 \times 10^{-7} \]
+\[60\,000 = 5 \times 10^{-7} \cdot N^3\]
+\[N^3 = \frac{60\,000}{5 \times 10^{-7}} = 120\,000\,000\,000\]
+\[N = \sqrt[3]{120\,000\,000\,000} = 4932 \text{ operations}\]
+
+\end{itemize}
+\section{Opgave 4}
+$O(N)$
+
+\section{Opgave 5}
+\begin{itemize}
+\item[A.] $O(N)$
+\item[B.] $O(\frac{N}{2}) = O(N)$
+\item[C.] $O(N^2)$
+\item[D.] $O(N) + O(N) = O(N)$
+\item[E.] $O(N^3)$
+\item[F.] $O(N^2)$
+\item[G.] $O(N^5)$
+\item[H.] $O(\log_2{N})$
+
+\end{itemize}
+\section{Opgave 6}
+Main function: $O(N^3)$
+Functie: $O(y)$
+Functie2: $O(3\log_2{x})$
+
+$y := N^2 - i$
+and $x := N$
+
+gives $O(N^3 \log_2{N})$
+
+\section{Opgave 7}
+\begin{itemize}
+\item[A.] $O(N)$ groeit minder snel dan $O(N^2)$
+\item[B.] $O(\log_2{N})$ plateaut
+\item[C.] $\log_2{N}$ plateaut, $N$ gaat recht, $N\log_2{N}$ gaat hoger dan $N$  
+
+\end{itemize}
+\section{Opgave 8}
+\begin{itemize}
+\item[B.] $\log_2{1024} = 10, \log_2{2048} = 11$
+\item[C.] $x = 2^4 = 16$
+\item[D.] $x = 2^{10} = 1024$ 
+
+\end{itemize}
+\section{Opgave 9}
+\begin{itemize}
+\item[A.] $x^2 = 10x$ doorkruist op $x = 10$. $x^2 = 1\,000x$ doorkruist op $x = 1\,000$. $\alpha$ moet minimaal $x$ zijn en wordt dan versimpelt naar $x^2+\alpha$.
+\item[B.] $x = e^{-W_{-1}-\log{2}/100} \approx 996$
+\item[C.] $x = e^{-W_{-1}-\log{2}/100} \approx 996$
+\end{itemize}
+
+\end{document}
