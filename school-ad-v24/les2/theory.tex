@@ -17,11 +17,15 @@ Insert($i$, el) & $O(n)$ & $O(1)$ \\
 Remove($i$)     & $O(n)$ & $O(1)$ \\
 \end{tabular}
 
+\begin{itemize}
+\item[LinkedList] \( x_\text{first} \rightarrow x_1 \rightarrow x_2 \rightarrow \cdots x_\text{last} \rightarrow \emptyset \)
+\item[DoublyLinkedList] \( \emptyset \leftarrow x_\text{first} \rightleftharpoons x_1 \rightleftharpoons x_2 \rightleftharpoons \cdots x_\text{last} \rightarrow \emptyset \)
+\end{itemize}
+
 \subsection{Expressies}
 $\frac{6}{3-1}_\text{infix} = 6\ 3\ 1 - /_\text{postfix}$
 \begin{itemize}
-\item[Stack:]
-\item[] $[]$
+\item[Stack:] $[]$
 \item[] $[6]$
 \item[] $[6,3]$
 \item[] $[6,3,1]$
@@ -30,6 +34,15 @@ $\frac{6}{3-1}_\text{infix} = 6\ 3\ 1 - /_\text{postfix}$
 \item[] $[6,2,/]$
 \item[] $[3]$
 \end{itemize}
+
+\subsection{Stack}
+\begin{tabular}{l|l}
+Operatie & Stack \\
+\hline
+Push & $O(1)$ \\
+Pop  & $O(1)$ \\
+Top  & $O(1)$ \\
+\end{tabular}
 
 \section{Opgave 1}
 abc
