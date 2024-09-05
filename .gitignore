@@ -396,3 +396,7 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+school-ad-v24/les2/theory.aux
+school-ad-v24/les2/theory.fdb_latexmk
+school-ad-v24/les2/theory.fls
+school-ad-v24/les2/theory.synctex.gz
