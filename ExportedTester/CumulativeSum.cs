@@ -13,7 +13,7 @@ namespace ExportedTester
         [TestCase(new int[] { 1, 2, 3, 4, 5, 6 }, 21)]
         [TestCase(new int[] { 7, 2, 3, 4, 5, 6 }, 27)]
         [TestCase(new int[] { 7, 2, 8, 4, 5, 6 }, 32)]
-        public void CumulativeSumIsCorrect(int[] array, int expected)
+        public void FindsSum(int[] array, int expected)
         {
             Assert.That(Arrays.CumulativeSum(array, array.Length - 1), Is.EqualTo(expected));
         }
@@ -22,18 +22,15 @@ namespace ExportedTester
         [TestCase(new double[] { 1, 2, 3, 4, 5, 6 }, 21)]
         [TestCase(new double[] { 7, 2, 3, 4, 5, 6 }, 27)]
         [TestCase(new double[] { 7, 2, 8, 4, 5, 6 }, 32)]
-        public void CumulativeSumIsCorrectDouble(double[] array, double expected)
+        public void FindsDoubleSum(double[] array, double expected)
         {
             Assert.That(Arrays.CumulativeSum(array, array.Length - 1), Is.EqualTo(expected));
         }
 
         [Test]
-        public void CumulativeSumSupportsOutOfRangeIndex()
+        public void InvalidOnOutOfRangeIndex()
         {
-            Assert.DoesNotThrow(() =>
-            {
-                _ = Arrays.CumulativeSum([1, 2, 3], 99);
-            });
+            Assert.Throws<IndexOutOfRangeException>(() => Arrays.CumulativeSum([1, 2, 3], 99));
         }
     }
 }

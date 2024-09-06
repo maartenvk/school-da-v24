@@ -13,8 +13,15 @@ namespace school_ad_v24.export
     {
         public static int[] Populate(int length, int min, int max)
         {
-            Debug.Assert(length >= 0);
-            Debug.Assert(min <= max);
+            if (length < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(length), length, "should be >= 0");
+            }
+
+            if (min > max)
+            {
+                throw new ArgumentOutOfRangeException(nameof(min), min, "should be <= max");
+            }
 
             return Enumerable
                 .Repeat(0, length)
@@ -24,8 +31,15 @@ namespace school_ad_v24.export
 
         public static double[] Populate(int length, double min, double max)
         {
-            Debug.Assert(length >= 0);
-            Debug.Assert(min <= max);
+            if (length < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(length), length, "should be >= 0");
+            }
+
+            if (min > max)
+            {
+                throw new ArgumentOutOfRangeException(nameof(min), min, "should be <= max");
+            }
 
             return Enumerable
                 .Repeat(0, length)
@@ -35,8 +49,6 @@ namespace school_ad_v24.export
 
         public static int MaxIndex<T>(T[] array) where T : INumber<T>, IMinMaxValue<T>
         {
-            Debug.Assert(array.Length > 0);
-
             int max_index = 0;
             T highest = T.MinValue;
 
@@ -54,14 +66,19 @@ namespace school_ad_v24.export
 
         public static T MaxValue<T>(T[] array) where T : INumber<T>, IMinMaxValue<T>
         {
-            Debug.Assert(array.Length > 0);
+            if (array.Length == 0) {
+                throw new ArgumentException("sequence is empty", nameof(array));
+            }
 
-            return array.Max() ?? T.MinValue;
+            return array.Max()!;
         }
 
         public static T CumulativeSum<T>(T[] array, int index) where T : INumber<T>, IMinMaxValue<T>
         {
-            Debug.Assert(index >= 0);
+            if (index >= array.Length)
+            {
+                throw new IndexOutOfRangeException("should be < length");
+            }
 
             T sum = T.Zero;
             for (int i = 0; i <= index && i < array.Length; i++)
@@ -74,8 +91,10 @@ namespace school_ad_v24.export
 
         public static double[] MovingAverage(double[] array, int n)
         {
-            Debug.Assert(n > 0);
-            Debug.Assert(array.Length > 0);
+            if (n <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(n), n, "cannot take average of an empty range");
+            }
 
             double[] output = new double[array.Length];
 

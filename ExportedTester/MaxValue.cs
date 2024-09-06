@@ -34,5 +34,11 @@ namespace ExportedTester
         {
             Assert.That(Arrays.MaxValue(Enumerable.Repeat(el, n).ToArray()), Is.EqualTo(el));
         }
+
+        [Test]
+        public void InvalidOnEmpty()
+        {
+            Assert.Throws<ArgumentException>(() => Arrays.MaxValue<int>([]));
+        }
     }
 }

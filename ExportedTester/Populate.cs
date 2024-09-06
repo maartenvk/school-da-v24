@@ -1,4 +1,5 @@
 using school_ad_v24.export;
+using System.Diagnostics;
 
 namespace ExportedTester
 {
@@ -47,6 +48,12 @@ namespace ExportedTester
                     return el >= min && el < max;
                 }), Is.True);
             });
+        }
+
+        [Test]
+        public void InvalidLengthThrows()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => Arrays.Populate(-1, 0, 0));
         }
     }
 }
