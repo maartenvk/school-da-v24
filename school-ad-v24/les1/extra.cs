@@ -54,6 +54,8 @@ namespace school_ad_v24.les1
         {
             this.function = function;
             this.paramsSupplier = paramsSupplier;
+            Ns = [];
+            Data = [];
         }
 
         private void InvokeFunction(dynamic args)
