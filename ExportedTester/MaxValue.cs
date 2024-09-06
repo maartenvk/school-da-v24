@@ -26,5 +26,13 @@ namespace ExportedTester
         {
             Assert.That(Arrays.MaxValue(array), Is.EqualTo(expected));
         }
+
+        [Test]
+        [TestCase(1, 64)]
+        [TestCase(5, 32)]
+        public void FindsEqual(int el, int n)
+        {
+            Assert.That(Arrays.MaxValue(Enumerable.Repeat(el, n).ToArray()), Is.EqualTo(el));
+        }
     }
 }
