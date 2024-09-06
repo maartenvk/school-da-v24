@@ -2,7 +2,7 @@ using school_ad_v24.export;
 
 namespace ExportedTester
 {
-    public class Tests
+    public class Populate
     {
         [SetUp]
         public void Setup()
