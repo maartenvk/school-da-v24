@@ -2,10 +2,11 @@
 \title{Les 1 huiswerk}
 \author{Maarten}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \begin{document}
 \maketitle
-\section{Opgave 1}
 
+\section{Opgave 1}
 \begin{itemize}
 \item[a.]
     \begin{description}
@@ -27,6 +28,63 @@
     \item $[2,7,0,4]$
     \item $[7,0,4]$
     \item $[0,4]$
+    \end{description}
+\end{itemize}
+
+\section{Opgave 2}
+\begin{itemize}
+\item[a.]
+    \begin{description}
+    \item[stack:]
+    \item $2$
+    \item $2 \rightarrow 1$
+    \item $2$
+    \item $2 \rightarrow 4$
+    \item $2 \rightarrow 4 \rightarrow 3$
+    \item $2 \rightarrow 4$
+    \item $2$
+    \item $2 \rightarrow 5$
+    \end{description}
+
+\item[b.]
+    \begin{description}
+    \item[stack:]
+    \item $[\varnothing,\varnothing,\varnothing,\varnothing]$
+    \item $[2,\varnothing,\varnothing,\varnothing]$
+    \item $[2,1,\varnothing,\varnothing]$
+    \item $[2,\varnothing,\varnothing,\varnothing]$
+    \item $[2,4,\varnothing,\varnothing]$
+    \item $[2,4,3,\varnothing]$
+    \item $[2,4,\varnothing,\varnothing]$
+    \item $[2,\varnothing,\varnothing,\varnothing]$
+    \item $[2,5,\varnothing,\varnothing]$
+    \end{description}
+
+\item[c.]
+    \begin{description}
+    \item[queue:]
+    \item $2$
+    \item $2 \rightarrow 1$
+    \item $1$
+    \item $1 \rightarrow 4$
+    \item $1 \rightarrow 4 \rightarrow 3$
+    \item $4 \rightarrow 3$
+    \item $3$
+    \item $3 \rightarrow 5$
+    \end{description}
+
+\item[d.]
+    \begin{description}
+    \item[queue:] assuming circular implementation
+    \item $[\varnothing,\varnothing,\varnothing,\varnothing]$ 
+    \item $[2,\varnothing,\varnothing,\varnothing]$ 
+    \item $[2,1,\varnothing,\varnothing]$ 
+    \item $[\varnothing,1,\varnothing,\varnothing]$ 
+    \item $[\varnothing,1,4,\varnothing]$ 
+    \item $[\varnothing,1,4,3]$ 
+    \item $[\varnothing,\varnothing,4,3]$ 
+    \item $[\varnothing,\varnothing,\varnothing,3]$ 
+    \item $[5,\varnothing,\varnothing,3]$ 
     \end{description}
 \end{itemize}
 
