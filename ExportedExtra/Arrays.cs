@@ -13,7 +13,7 @@ namespace school_ad_v24.export
         public static int[] Populate(int length, int min, int max)
         {
             Contract.Assert(length >= 0);
-            Contract.Assert(min < max);
+            Contract.Assert(min <= max);
 
             return Enumerable
                 .Repeat(0, length)
@@ -24,7 +24,7 @@ namespace school_ad_v24.export
         public static double[] Populate(int length, double min, double max)
         {
             Contract.Assert(length >= 0);
-            Contract.Assert(min < max);
+            Contract.Assert(min <= max);
 
             return Enumerable
                 .Repeat(0, length)
