@@ -142,4 +142,21 @@ Assuming $\exists!_n \in \text{LinkedList}$ for deleted item $n$
 \item[$?_3$:] prev 
 \item[$?_4$:] node 
 \end{itemize}
+
+\section{Opgave 5}
+\begin{itemize}
+\item[a.]
+    \begin{description}
+    \item last = d.prev;
+    \item last.next = null;
+    \end{description}
+
+\item[b.]
+    \begin{description}
+    \item e.next = d;
+    \item e.prev = c;
+    \item last.prev = e;
+    \item c.next = e;
+    \end{description}
+\end{itemize}
 \end{document}
