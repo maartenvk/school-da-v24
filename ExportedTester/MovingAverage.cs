@@ -15,5 +15,12 @@ namespace ExportedTester
         {
             Assert.That(Arrays.MovingAverage(array, n), Is.EqualTo(expected));
         }
+
+        [Test]
+        public void InvalidOnOutOfRange()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => Arrays.MovingAverage([], -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() => Arrays.MovingAverage([], 0));
+        }
     }
 }
