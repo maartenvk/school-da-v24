@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Numerics;
@@ -12,8 +13,8 @@ namespace school_ad_v24.export
     {
         public static int[] Populate(int length, int min, int max)
         {
-            Contract.Assert(length >= 0);
-            Contract.Assert(min <= max);
+            Debug.Assert(length >= 0);
+            Debug.Assert(min <= max);
 
             return Enumerable
                 .Repeat(0, length)
@@ -23,8 +24,8 @@ namespace school_ad_v24.export
 
         public static double[] Populate(int length, double min, double max)
         {
-            Contract.Assert(length >= 0);
-            Contract.Assert(min <= max);
+            Debug.Assert(length >= 0);
+            Debug.Assert(min <= max);
 
             return Enumerable
                 .Repeat(0, length)
@@ -34,7 +35,7 @@ namespace school_ad_v24.export
 
         public static int MaxIndex<T>(T[] array) where T : INumber<T>, IMinMaxValue<T>
         {
-            Contract.Assert(array.Length > 0);
+            Debug.Assert(array.Length > 0);
 
             int max_index = 0;
             T highest = T.MinValue;
@@ -53,18 +54,17 @@ namespace school_ad_v24.export
 
         public static T MaxValue<T>(T[] array) where T : INumber<T>, IMinMaxValue<T>
         {
-            Contract.Assert(array.Length > 0);
+            Debug.Assert(array.Length > 0);
 
             return array.Max() ?? T.MinValue;
         }
 
         public static T CumulativeSum<T>(T[] array, int index) where T : INumber<T>, IMinMaxValue<T>
         {
-            Contract.Assert(index >= 0);
-            Contract.Assert(index < array.Length);
+            Debug.Assert(index >= 0);
 
             T sum = T.Zero;
-            for (int i = 0; i <= index; i++)
+            for (int i = 0; i <= index && i < array.Length; i++)
             {
                 sum += array[i];
             }
@@ -74,8 +74,8 @@ namespace school_ad_v24.export
 
         public static double[] MovingAverage(double[] array, int n)
         {
-            Contract.Assert(n > 0);
-            Contract.Assert(array.Length > 0);
+            Debug.Assert(n > 0);
+            Debug.Assert(array.Length > 0);
 
             double[] output = new double[array.Length];
 
