@@ -1,4 +1,5 @@
-﻿using school_ad_v24.les1;
+﻿using school_ad_v24.export;
+using school_ad_v24.les1;
 
 // Console.WriteLine(string.Join(',', Sieve_of_eratosthenes.Solve(10)));
 
@@ -62,11 +63,11 @@ L.LLLLL.LL
 //Console.WriteLine(string.Join(',', output));
 
 
-var a = ArrayUtils.Populate(10, 0, 100);
-var b = ArrayUtils.Populate(10, 0, 100);
+var a = school_ad_v24.export.Arrays.Populate(10, 0, 100);
+var b = school_ad_v24.export.Arrays.Populate(10, 0, 100);
 
-Array.Sort(a);
-Array.Sort(b);
+System.Array.Sort(a);
+System.Array.Sort(b);
 
-var output = ArrayUtils.MergeArrays(a, b);
+var output = Arrays.MergeArrays(a, b);
 Console.WriteLine(string.Join(',', output));

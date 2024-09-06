@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace school_ad_v24.export
 {
-    public static class Utility
+    public static class Arrays
     {
         public static int[] Populate(int length, int min, int max)
         {
