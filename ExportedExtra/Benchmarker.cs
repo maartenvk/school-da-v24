@@ -22,8 +22,8 @@ namespace school_ad_v24.export
         {
             this.function = function;
             this.paramsSupplier = paramsSupplier;
-            Ns = [];
-            Data = [];
+            Ns = Array.Empty<int>();
+            Data = Array.Empty<long>();
         }
 
         private void InvokeFunction(dynamic args)

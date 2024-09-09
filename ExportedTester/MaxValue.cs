@@ -38,7 +38,7 @@ namespace ExportedTester
         [Test]
         public void InvalidOnEmpty()
         {
-            Assert.Throws<ArgumentException>(() => Arrays.MaxValue<int>([]));
+            Assert.Throws<ArgumentException>(() => Arrays.MaxValue(Array.Empty<int>()));
         }
     }
 }

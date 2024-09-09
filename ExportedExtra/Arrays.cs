@@ -47,10 +47,10 @@ namespace school_ad_v24.export
                 .ToArray();
         }
 
-        public static int MaxIndex<T>(T[] array) where T : INumber<T>, IMinMaxValue<T>
+        public static int MaxIndex(int[] array)
         {
             int max_index = 0;
-            T highest = T.MinValue;
+            int highest = int.MinValue;
 
             for (int i = 0; i < array.Length; i++)
             {
@@ -64,23 +64,84 @@ namespace school_ad_v24.export
             return max_index;
         }
 
-        public static T MaxValue<T>(T[] array) where T : INumber<T>, IMinMaxValue<T>
+        public static int MaxIndex(double[] array)
+        {
+            int max_index = 0;
+            double highest = double.MinValue;
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] > highest)
+                {
+                    max_index = i;
+                    highest = array[i];
+                }
+            }
+
+            return max_index;
+        }
+
+        public static int MaxValue(int[] array)
         {
             if (array.Length == 0) {
                 throw new ArgumentException("sequence is empty", nameof(array));
             }
 
-            return array.Max()!;
+            int max = 0;
+            foreach (int n in array)
+            {
+                if (n > max)
+                {
+                    max = n;
+                }
+            }
+            
+            return max;
         }
 
-        public static T CumulativeSum<T>(T[] array, int index) where T : INumber<T>, IMinMaxValue<T>
+        public static double MaxValue(double[] array)
+        {
+            if (array.Length == 0)
+            {
+                throw new ArgumentException("sequence is empty", nameof(array));
+            }
+
+            double max = 0;
+            foreach (int n in array)
+            {
+                if (n > max)
+                {
+                    max = n;
+                }
+            }
+
+            return max;
+        }
+
+        public static int CumulativeSum(int[] array, int index)
         {
             if (index >= array.Length)
             {
                 throw new IndexOutOfRangeException("should be < length");
             }
 
-            T sum = T.Zero;
+            int sum = 0;
+            for (int i = 0; i <= index && i < array.Length; i++)
+            {
+                sum += array[i];
+            }
+
+            return sum;
+        }
+
+        public static double CumulativeSum(double[] array, int index)
+        {
+            if (index >= array.Length)
+            {
+                throw new IndexOutOfRangeException("should be < length");
+            }
+
+            double sum = 0;
             for (int i = 0; i <= index && i < array.Length; i++)
             {
                 sum += array[i];
@@ -123,19 +184,19 @@ namespace school_ad_v24.export
             return output;
         }
 
-        public static T[] MergeArrays<T>(T[] a, T[] b) where T : INumber<T>, IComparable<T>, IMinMaxValue<T>
+        public static int[] MergeArrays(int[] a, int[] b)
         {
-            T[] merged = new T[a.Length + b.Length];
+            int[] merged = new int[a.Length + b.Length];
 
             int l = 0;
             int r = 0;
 
             for (int i = 0; i < merged.Length; i++)
             {
-                T x = l < a.Length ? a[l] : T.MaxValue;
-                T y = r < b.Length ? b[r] : T.MaxValue;
+                int x = l < a.Length ? a[l] : int.MaxValue;
+                int y = r < b.Length ? b[r] : int.MaxValue;
 
-                T lowest = x;
+                int lowest = x;
                 if (x < y)
                 {
                     l++;
@@ -150,6 +211,41 @@ namespace school_ad_v24.export
             }
 
             return merged;
+        }
+
+        public static void MergeArraysInPlace(ref int[] array, int left, int middle, int right)
+        {
+            int length = middle - left;
+            int offset = left;
+
+            int[] merged = new int[length];
+
+            int l = left;
+            int r = middle;
+
+            for (int i = 0; i < merged.Length; i++)
+            {
+                int x = l < middle ? array[l] : int.MaxValue;
+                int y = r < right ? array[r] : int.MaxValue;
+
+                int lowest = x;
+                if (x < y)
+                {
+                    l++;
+                }
+                else
+                {
+                    r++;
+                    lowest = y;
+                }
+
+                merged[i] = lowest;
+            }
+
+            for (int i = 0; i < length; i++)
+            {
+                array[offset + i] = merged[i];
+            }
         }
     }
 }

@@ -30,7 +30,7 @@ namespace ExportedTester
         [Test]
         public void InvalidOnOutOfRangeIndex()
         {
-            Assert.Throws<IndexOutOfRangeException>(() => Arrays.CumulativeSum([1, 2, 3], 99));
+            Assert.Throws<IndexOutOfRangeException>(() => Arrays.CumulativeSum((int[])[1, 2, 3], 99));
         }
     }
 }
