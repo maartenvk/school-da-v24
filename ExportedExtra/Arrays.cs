@@ -215,7 +215,7 @@ namespace school_ad_v24.export
 
         public static void MergeArraysInPlace(ref int[] array, int left, int middle, int right)
         {
-            int length = middle - left;
+            int length = right - left;
             int offset = left;
 
             int[] merged = new int[length];
