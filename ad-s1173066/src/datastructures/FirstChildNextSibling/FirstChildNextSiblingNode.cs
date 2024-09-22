@@ -8,27 +8,41 @@ namespace AD
 
         public FirstChildNextSiblingNode(T data, FirstChildNextSiblingNode<T> firstChild, FirstChildNextSiblingNode<T> nextSibling)
         {
-            throw new System.NotImplementedException();
+            this.data = data;
+            this.firstChild = firstChild;
+            this.nextSibling = nextSibling;
         }
 
         public FirstChildNextSiblingNode(T data)
         {
-            throw new System.NotImplementedException();
+            this.data = data;
+            firstChild = null;
+            nextSibling = null;
         }
 
         public T GetData()
         {
-            throw new System.NotImplementedException();
+            return data;
         }
 
         public FirstChildNextSiblingNode<T> GetFirstChild()
         {
-            throw new System.NotImplementedException();
+            return firstChild;
         }
 
         public FirstChildNextSiblingNode<T> GetNextSibling()
         {
-            throw new System.NotImplementedException();
+            return nextSibling;
+        }
+
+        public bool hasChild()
+        {
+            return !(firstChild is null);
+        }
+
+        public bool hasNextSibling()
+        {
+            return !(nextSibling is null);
         }
     }
 }
