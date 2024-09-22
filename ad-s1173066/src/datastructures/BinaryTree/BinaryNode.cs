@@ -44,5 +44,10 @@ namespace AD
         {
             return !(right is null);
         }
+
+        public bool IsLeaf()
+        {
+            return !HasLeft() && !HasRight();
+        }
     }
 }

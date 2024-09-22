@@ -81,7 +81,6 @@ namespace AD
             }
 
             return HeightRecursive(root, 0);
-            throw new System.NotImplementedException();
         }
 
         public void MakeEmpty()
@@ -222,19 +221,97 @@ namespace AD
         // Interface methods : methods that have to be implemented for homework
         //----------------------------------------------------------------------
 
+        private int NumberOfLeavesRecursive(BinaryNode<T> node)
+        {
+            if (node.IsLeaf())
+            {
+                return 1;
+            }
+
+            int totalLeaves = 0;
+            if (node.HasLeft())
+            {
+                totalLeaves += NumberOfLeavesRecursive(node.GetLeft());
+            }
+
+            if (node.HasRight())
+            {
+                totalLeaves += NumberOfLeavesRecursive(node.GetRight());
+            }
+
+            return totalLeaves;
+        }
+
         public int NumberOfLeaves()
         {
-            throw new System.NotImplementedException();
+            if (IsEmpty())
+            {
+                return 0;
+            }
+
+            return NumberOfLeavesRecursive(root);
+        }
+
+        private int NumberOfNodesWithOneChildRecursive(BinaryNode<T> node)
+        {
+            int total = 0;
+            if (node.HasLeft() ^ node.HasRight())
+            {
+                total += 1;
+            }
+
+            if (node.HasLeft())
+            {
+                total += NumberOfNodesWithOneChildRecursive(node.GetLeft());
+            }
+
+            if (node.HasRight())
+            {
+                total += NumberOfNodesWithOneChildRecursive(node.GetRight());
+            }
+
+            return total;
         }
 
         public int NumberOfNodesWithOneChild()
         {
-            throw new System.NotImplementedException();
+            if (IsEmpty())
+            {
+                return 0;
+            }
+
+            return NumberOfNodesWithOneChildRecursive(root);
+        }
+
+        private int NumberOfNodesWithTwoChildrenRecursive(BinaryNode<T> node)
+        {
+            int total = 0;
+            if (node.HasLeft() && node.HasRight())
+            {
+                total += 1;
+            }
+
+            if (node.HasLeft())
+            {
+                total += NumberOfNodesWithTwoChildrenRecursive(node.GetLeft());
+            }
+
+            if (node.HasRight())
+            {
+                total += NumberOfNodesWithTwoChildrenRecursive(node.GetRight());
+            }
+
+            return total;
         }
 
         public int NumberOfNodesWithTwoChildren()
         {
-            throw new System.NotImplementedException();
+            if (IsEmpty())
+            {
+                return 0;
+            }
+
+            return NumberOfNodesWithTwoChildrenRecursive(root);
         }
     }
 }
