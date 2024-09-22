@@ -68,12 +68,12 @@ namespace AD
 
             while (true)
             {
-                while (list[i] <= pivot && i < hi)
+                while (j >= i && list[i] <= pivot)
                 {
                     i++;
                 }
 
-                while (list[j] >= pivot && j > lo)
+                while (j >= i && list[j] >= pivot)
                 {
                     j--;
                 }
