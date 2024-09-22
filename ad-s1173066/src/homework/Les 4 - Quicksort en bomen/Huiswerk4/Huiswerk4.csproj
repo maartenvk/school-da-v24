@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="..\..\..\datastructures\BinaryTree\BinaryNode.cs" Link="BinaryTree\BinaryNode.cs" />
     <Compile Include="..\..\..\datastructures\BinaryTree\BinaryTree.cs" Link="BinaryTree\BinaryTree.cs" />
+    <Compile Include="..\..\..\datastructures\BinaryTree\BinaryTreeWalker.cs" Link="BinaryTree\BinaryTreeWalker.cs" />
     <Compile Include="..\..\..\datastructures\BinaryTree\IBinaryNode.cs" Link="BinaryTree\IBinaryNode.cs" />
     <Compile Include="..\..\..\datastructures\BinaryTree\IBinaryTree.cs" Link="BinaryTree\IBinaryTree.cs" />
     <Compile Include="..\..\..\datastructures\FirstChildNextSibling\FirstChildNextSiblingNode.cs" Link="FirstChildNextSibling\FirstChildNextSiblingNode.cs" />
