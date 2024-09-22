@@ -6,7 +6,9 @@ namespace AD
         public BinaryNode<T> left;
         public BinaryNode<T> right;
 
-        public BinaryNode() : this(default(T), default(BinaryNode<T>), default(BinaryNode<T>)) { }
+        public BinaryNode() : this(default(T)) { }
+
+        public BinaryNode(T data) : this(data, null, null) { }
 
         public BinaryNode(T data, BinaryNode<T> left, BinaryNode<T> right)
         {
@@ -31,6 +33,16 @@ namespace AD
         public BinaryNode<T> GetRight()
         {
             return right;
+        }
+
+        public bool HasLeft()
+        {
+            return !(left is null);
+        }
+
+        public bool HasRight()
+        {
+            return !(right is null);
         }
     }
 }
