@@ -27,17 +27,19 @@ namespace AD
             return root;
         }
 
-        public int Size()
+        public int SizeRecursive(BinaryNode<T> node)
         {
-            if (IsEmpty())
+            if (node is null)
             {
                 return 0;
             }
 
-            return BinaryTreeWalker<T, int>.OperateOn(GetRoot(), (children, node) =>
-            {
-                return 1 + children.Item1 + children.Item2;
-            });
+            return 1 + SizeRecursive(node.left) + SizeRecursive(node.right);
+        }
+
+        public int Size()
+        {
+            return SizeRecursive(root);
         }
 
         private int HeightRecursive(BinaryNode<T> node, int height)
