@@ -34,12 +34,12 @@ namespace AD
                 return 0;
             }
 
-            return 1 + SizeRecursive(node.left) + SizeRecursive(node.right);
+            return 1 + SizeRecursive(node.GetLeft()) + SizeRecursive(node.GetRight());
         }
 
         public int Size()
         {
-            return SizeRecursive(root);
+            return SizeRecursive(GetRoot());
         }
 
         public int HeightRecursive(BinaryNode<T> node, int height)
@@ -50,14 +50,14 @@ namespace AD
             }
 
             return Math.Max(height, Math.Max(
-                HeightRecursive(node.left, height + 1),
-                HeightRecursive(node.right, height + 1)
+                HeightRecursive(node.GetLeft(), height + 1),
+                HeightRecursive(node.GetRight(), height + 1)
             ));
         }
 
         public int Height()
         {
-            return HeightRecursive(root, 0);
+            return HeightRecursive(GetRoot(), 0);
         }
 
         public void MakeEmpty()
@@ -94,15 +94,15 @@ namespace AD
                 return "NIL";
             }
 
-            string left = ToPrefixStringRecursive(node.left);
-            string right = ToPrefixStringRecursive(node.right);
+            string left = ToPrefixStringRecursive(node.GetLeft());
+            string right = ToPrefixStringRecursive(node.GetRight());
 
             return $"[ {node.GetData()} {left} {right} ]";
         }
 
         public string ToPrefixString()
         {
-            return ToPrefixStringRecursive(root);
+            return ToPrefixStringRecursive(GetRoot());
         }
 
         public string ToInfixStringRecursive(BinaryNode<T> node)
@@ -112,15 +112,15 @@ namespace AD
                 return "NIL";
             }
 
-            string left = ToInfixStringRecursive(node.left);
-            string right = ToInfixStringRecursive(node.right);
+            string left = ToInfixStringRecursive(node.GetLeft());
+            string right = ToInfixStringRecursive(node.GetRight());
 
             return $"[ {left} {node.GetData()} {right} ]";
         }
 
         public string ToInfixString()
         {
-            return ToInfixStringRecursive(root);
+            return ToInfixStringRecursive(GetRoot());
         }
 
         public string ToPostfixStringRecursive(BinaryNode<T> node)
@@ -130,15 +130,15 @@ namespace AD
                 return "NIL";
             }
 
-            string left = ToPostfixStringRecursive(node.left);
-            string right = ToPostfixStringRecursive(node.right);
+            string left = ToPostfixStringRecursive(node.GetLeft());
+            string right = ToPostfixStringRecursive(node.GetRight());
 
             return $"[ {left} {right} {node.GetData()} ]";
         }
 
         public string ToPostfixString()
         {
-            return ToPostfixStringRecursive(root);
+            return ToPostfixStringRecursive(GetRoot());
         }
 
         //----------------------------------------------------------------------
@@ -176,15 +176,15 @@ namespace AD
                 singleChild = 1;
             }
 
-            int left = NumberOfNodesWithOneChildRecursive(node.left);
-            int right = NumberOfNodesWithOneChildRecursive(node.right);
+            int left = NumberOfNodesWithOneChildRecursive(node.GetLeft());
+            int right = NumberOfNodesWithOneChildRecursive(node.GetRight());
 
             return singleChild + left + right;
         }
 
         public int NumberOfNodesWithOneChild()
         {
-            return NumberOfNodesWithOneChildRecursive(root);
+            return NumberOfNodesWithOneChildRecursive(GetRoot());
         }
 
         public int NumberOfNodesWithTwoChildrenRecursive(BinaryNode<T> node)
@@ -200,15 +200,15 @@ namespace AD
                 twoChildren = 1;
             }
 
-            int left = NumberOfNodesWithTwoChildrenRecursive(node.left);
-            int right = NumberOfNodesWithTwoChildrenRecursive(node.right);
+            int left = NumberOfNodesWithTwoChildrenRecursive(node.GetLeft());
+            int right = NumberOfNodesWithTwoChildrenRecursive(node.GetRight());
 
             return twoChildren + left + right;
         }
 
         public int NumberOfNodesWithTwoChildren()
         {
-            return NumberOfNodesWithTwoChildrenRecursive(root);
+            return NumberOfNodesWithTwoChildrenRecursive(GetRoot());
         }
     }
 }
