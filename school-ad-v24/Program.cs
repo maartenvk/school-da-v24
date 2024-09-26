@@ -1,7 +1,8 @@
 ﻿using school_ad_v24.export;
 using school_ad_v24.les1;
+using school_ad_v24.les3;
 
-Console.WriteLine(string.Join(',', Sieve_of_eratosthenes.Solve(100)));
+//Console.WriteLine(string.Join(',', Sieve_of_eratosthenes.Solve(100)));
 
 // Game_of_life gol = new(40, 25);
 // gol.PutGlider();
@@ -71,3 +72,15 @@ L.LLLLL.LL
 
 //var output = Arrays.MergeArrays(a, b);
 //Console.WriteLine(string.Join(',', output));
+
+int x = Recursion.Sum(123);
+Console.WriteLine(x);
+
+x = Recursion.Sum(2525);
+Console.WriteLine(x);
+
+string y = Recursion.Reverse("hallo");
+Console.WriteLine(y);
+
+y = Recursion.Reverse("parterretrap");
+Console.WriteLine(y);
