@@ -35,12 +35,12 @@ namespace AD
             return nextSibling;
         }
 
-        public bool hasChild()
+        public bool HasChild()
         {
             return firstChild is not null;
         }
 
-        public bool hasNextSibling()
+        public bool HasNextSibling()
         {
             return nextSibling is not null;
         }
