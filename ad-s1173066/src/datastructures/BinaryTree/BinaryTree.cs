@@ -163,22 +163,28 @@ namespace AD
             });
         }
 
-        public int NumberOfNodesWithOneChild()
+        public int NumberOfNodesWithOneChildRecursive(BinaryNode<T> node)
         {
-            if (IsEmpty())
+            if (node is null)
             {
                 return 0;
             }
 
-            return BinaryTreeWalker<T, int>.OperateOn(GetRoot(), (children, node) =>
+            int singleChild = 0;
+            if (node.HasLeft() ^ node.HasRight())
             {
-                if (node.HasLeft() ^ node.HasRight())
-                {
-                    return 1;
-                }
+                singleChild = 1;
+            }
 
-                return children.Item1 + children.Item2;
-            });
+            int left = NumberOfNodesWithOneChildRecursive(node.left);
+            int right = NumberOfNodesWithOneChildRecursive(node.right);
+
+            return singleChild + left + right;
+        }
+
+        public int NumberOfNodesWithOneChild()
+        {
+            return NumberOfNodesWithOneChildRecursive(root);
         }
 
         public int NumberOfNodesWithTwoChildren()
