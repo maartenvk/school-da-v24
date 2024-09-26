@@ -37,12 +37,12 @@ namespace AD
 
         public bool HasLeft()
         {
-            return !(left is null);
+            return left is not null;
         }
 
         public bool HasRight()
         {
-            return !(right is null);
+            return right is not null;
         }
 
         public bool IsLeaf()
