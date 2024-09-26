@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace AD
 {
     public partial class BinarySearchTree<T> : BinaryTree<T>, IBinarySearchTree<T>
@@ -51,15 +53,29 @@ namespace AD
             InsertRecursive(GetRoot(), x);
         }
 
-        public T FindMin()
-
+        public static BinaryNode<T> FindMinNode(BinaryNode<T> node)
         {
-            throw new System.NotImplementedException();
+            if (node is null)
+            {
+                throw new BinarySearchTreeEmptyException();
+            }
+
+            while (node.HasLeft())
+            {
+                node = node.GetLeft();
+            }
+
+            return node;
+        }
+
+        public T FindMin()
+        {
+            return FindMinNode(GetRoot()).GetData();
         }
 
         public void RemoveMin()
         {
-            throw new System.NotImplementedException();
+            Remove(FindMin());
         }
 
         public void Remove(T x)
@@ -67,9 +83,46 @@ namespace AD
             throw new System.NotImplementedException();
         }
 
+        public static string InOrderRecursive(BinaryNode<T> node)
+        {
+            if (node is null)
+            {
+                return "NIL";
+            }
+
+            StringBuilder sb = new();
+
+            string left = InOrderRecursive(node.GetLeft());
+            string right = InOrderRecursive(node.GetRight());
+
+            if (left != "NIL")
+            {
+                sb.Append(left + ' ');
+            }
+
+            sb.Append(node.GetData().ToString());
+
+            if (right != "NIL")
+            {
+                sb.Append(' ' + right);
+            }
+
+            return sb.ToString();
+        }
+
         public string InOrder()
         {
-            throw new System.NotImplementedException();
+            if (IsEmpty())
+            {
+                return "";
+            }
+
+            return InOrderRecursive(GetRoot());
+        }
+
+        public override string ToString()
+        {
+            return InOrder();
         }
     }
 }
