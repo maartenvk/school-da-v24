@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 
 namespace AD
 {
@@ -34,33 +35,34 @@ namespace AD
             Console.WriteLine(ToString());
         }
 
-        private string ToStringRecursive(FirstChildNextSiblingNode<T> node)
+        private string ToStringRecursive(IFirstChildNextSiblingNode<T> node)
         {
-            string output = $"{node.GetData()}";
-
-            if (node.hasChild())
-            {
-                string childOutput = ToStringRecursive(node.GetFirstChild());
-                output += $",FC({childOutput})";
-            }
-
-            if (node.hasNextSibling())
-            {
-                string siblingOutput = ToStringRecursive(node.GetNextSibling());
-                output += $",NS({siblingOutput})";
-            }
-
-            return output;
-        }
-
-        public override string ToString()
-        {
-            if (Size() == 0)
+            if (node is null)
             {
                 return "NIL";
             }
 
-            return ToStringRecursive(root);
+            StringBuilder sb = new(node.GetData().ToString());
+
+            string childOutput = ToStringRecursive(node.GetFirstChild());
+            string siblingOutput = ToStringRecursive(node.GetNextSibling());
+
+            if (childOutput != "NIL")
+            {
+                sb.Append($",FC({childOutput})");
+            }
+
+            if (siblingOutput != "NIL")
+            {
+                sb.Append($",NS({siblingOutput})");
+            }
+
+            return sb.ToString();
+        }
+
+        public override string ToString()
+        {
+            return ToStringRecursive(GetRoot());
         }
     }
 }
