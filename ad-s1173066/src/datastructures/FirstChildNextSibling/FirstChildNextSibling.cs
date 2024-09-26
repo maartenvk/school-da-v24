@@ -11,31 +11,22 @@ namespace AD
             return root;
         }
 
-        private int SizeRecursive(FirstChildNextSiblingNode<T> node)
+        private int SizeRecursive(IFirstChildNextSiblingNode<T> node)
         {
-            int totalSize = 1;
-
-            if (node.hasChild())
-            {
-                totalSize += SizeRecursive(node.GetFirstChild());
-            }
-
-            if (node.hasNextSibling())
-            {
-                totalSize += SizeRecursive(node.GetNextSibling());
-            }
-
-            return totalSize;
-        }
-
-        public int Size()
-        {
-            if (root == null)
+            if (node is null)
             {
                 return 0;
             }
 
-            return SizeRecursive(root);
+            int firstChildSize = SizeRecursive(node.GetFirstChild());
+            int nextSiblingSize = SizeRecursive(node.GetNextSibling());
+
+            return 1 + firstChildSize + nextSiblingSize;
+        }
+
+        public int Size()
+        {
+            return SizeRecursive(GetRoot());
         }
 
         public void PrintPreOrder()
