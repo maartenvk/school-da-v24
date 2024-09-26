@@ -1,0 +1,23 @@
+\documentclass[12pt,a4paper]{article}
+\title{Les 4 huiswerk}
+\author{Maarten}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ffcode}
+\begin{document}
+\maketitle
+
+\section{Opgave 1}
+\begin{itemize}
+\item[a.] pivot $p$ = mid(4,7,2) = 4
+\item[b.] \{4i, 9, 5, 1, 2, 8, 3, 6j, 7\}
+\item[] \{7i, 9, 5, 1, 2, 8, 3, 6j, 4\} swap pivot
+\item[] \{7i, 9, 5, 1, 2, 8, 3j, 6, 4\} $i>p$
+\item[] \{3, 9i, 5, 1, 2, 8, 7j, 6, 4\} swap $i,j$
+\item[] \{3, 9i, 5, 1, 2j, 8, 7, 6, 4\} $i>p$
+\item[] \{3, 2, 5i, 1j, 9, 8, 7, 6, 4\} swap $i,j$
+\item[] \{3, 2, 5i, 1j, 9, 8, 7, 6, 4\} $i>p$
+\item[] \{3, 2, 1, 5ij, 9, 8, 7, 6, 4\} swap $p,i$
+\item[] \{3, 2, 1, 4, 9, 8, 7, 6, 5\}
+\end{itemize}
+\end{document}
