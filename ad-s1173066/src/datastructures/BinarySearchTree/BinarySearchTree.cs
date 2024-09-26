@@ -1,4 +1,5 @@
 using System.Text;
+using System;
 
 namespace AD
 {
@@ -78,28 +79,23 @@ namespace AD
             Remove(FindMin());
         }
 
-        public void Remove(T x)
+        public (BinaryNode<T>, BinaryNode<T>) FindWithParent(T x)
         {
-            BinaryNode<T> parent = GetRoot();
-            BinaryNode<T> node = GetRoot();
+            BinaryNode<T> node = GetRoot(), parent = GetRoot();
 
-            while (true)
+            while (node is not null)
             {
-                if (node is null)
-                {
-                    throw new BinarySearchTreeElementNotFoundException();
-                }
-
                 int comparison = x.CompareTo(node.GetData());
                 if (comparison == 0)
                 {
-                    break; // Found
+                    return (node, parent);
                 }
 
                 parent = node;
                 if (comparison < 0)
                 {
                     node = node.GetLeft();
+                    continue;
                 }
 
                 if (comparison > 0)
@@ -108,44 +104,93 @@ namespace AD
                 }
             }
 
-            bool isRight = parent.GetRight() == node;
+            throw new BinarySearchTreeElementNotFoundException();
+        }
+
+        public void Remove(T x)
+        {
+            (BinaryNode<T> node, BinaryNode<T> parent) = FindWithParent(x);
+
             if (node.IsLeaf())
             {
-                if (isRight)
-                {
-                    parent.right = null;
-                }
-                else
-                {
-                    parent.left = null;
-                }
-
-                if (GetRoot() == node)
-                {
-                    root = null;
-                }
-
+                RemoveLeaf(node, parent);
                 return;
             }
 
-            // this node only has 1 child
             if (node.HasLeft() ^ node.HasRight())
             {
-                BinaryNode<T> child = node.HasLeft() ? node.GetLeft() : node.GetRight();
-                if (isRight)
-                {
-                    parent.right = child;
-                }
-                else
-                {
-                    parent.left = child;
-                }
-
+                RemoveSingleChild(node, parent);
                 return;
             }
 
-            // TWO children
-            // todo
+            RemoveWithTwoChildren(node, parent);
+        }
+
+        public void RemoveLeaf(BinaryNode<T> node, BinaryNode<T> parent)
+        {
+            if (parent.right == node)
+            {
+                parent.right = null;
+            }
+            else
+            {
+                parent.left = null;
+            }
+
+            if (GetRoot() == node)
+            {
+                root = null;
+            }
+        }
+
+        public void RemoveSingleChild(BinaryNode<T> node, BinaryNode<T> parent)
+        {
+            BinaryNode<T> child = node.GetLeft() ?? node.GetRight();
+            if (parent.right == node)
+            {
+                parent.right = child;
+            }
+            else
+            {
+                parent.left = child;
+            }
+        }
+
+        public void RemoveWithTwoChildren(BinaryNode<T> node, BinaryNode<T> parent)
+        {
+            BinaryNode<T> successor_parent = node;
+            BinaryNode<T> successor = node.GetRight();
+            while (successor.HasLeft())
+            {
+                successor_parent = successor;
+                successor = successor.GetLeft();
+            }
+
+            BinaryNode<T> successor_successor = successor.GetRight();
+            if (successor_parent.left == successor)
+            {
+                successor_parent.left = successor_successor;
+            }
+            else
+            {
+                successor_parent.right = successor_successor;
+            }
+
+            if (parent == node)
+            {
+                root = successor;
+            }
+            else if (parent.right == node)
+            {
+                parent.right = successor;
+            }
+            else
+            {
+                parent.left = successor;
+            }
+
+            successor.left = node.GetLeft();
+            successor.right = node.GetRight();
         }
 
         public static string InOrderRecursive(BinaryNode<T> node)
