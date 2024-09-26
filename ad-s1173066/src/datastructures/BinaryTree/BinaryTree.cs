@@ -72,10 +72,19 @@ namespace AD
 
         public void Merge(T rootItem, BinaryTree<T> t1, BinaryTree<T> t2)
         {
-            BinaryNode<T> rootLeft = t1 is null ? null : t1.GetRoot(),
-                         rootRight = t2 is null ? null : t2.GetRoot();
+            BinaryNode<T> left = null, right = null;
 
-            root = new(rootItem, rootLeft, rootRight);
+            if (t1 is not null)
+            {
+                left = t1.GetRoot();
+            }
+
+            if (t2 is not null)
+            {
+                right = t2.GetRoot();
+            }
+
+            root = new(rootItem, left, right);
         }
 
         public string ToPrefixString()
