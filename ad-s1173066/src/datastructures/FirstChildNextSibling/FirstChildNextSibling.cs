@@ -12,7 +12,7 @@ namespace AD
             return root;
         }
 
-        public int SizeRecursive(IFirstChildNextSiblingNode<T> node)
+        public static int SizeRecursive(IFirstChildNextSiblingNode<T> node)
         {
             if (node is null)
             {
@@ -35,7 +35,7 @@ namespace AD
             Console.WriteLine(ToString());
         }
 
-        public string ToStringRecursive(IFirstChildNextSiblingNode<T> node)
+        public static string ToStringRecursive(IFirstChildNextSiblingNode<T> node)
         {
             if (node is null)
             {

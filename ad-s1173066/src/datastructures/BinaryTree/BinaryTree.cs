@@ -27,7 +27,7 @@ namespace AD
             return root;
         }
 
-        public int SizeRecursive(BinaryNode<T> node)
+        public static int SizeRecursive(BinaryNode<T> node)
         {
             if (node is null)
             {
@@ -42,7 +42,7 @@ namespace AD
             return SizeRecursive(GetRoot());
         }
 
-        public int HeightRecursive(BinaryNode<T> node, int height)
+        public static int HeightRecursive(BinaryNode<T> node, int height)
         {
             if (node is null)
             {
@@ -87,7 +87,7 @@ namespace AD
             root = new(rootItem, left, right);
         }
 
-        public string ToPrefixStringRecursive(BinaryNode<T> node)
+        public static string ToPrefixStringRecursive(BinaryNode<T> node)
         {
             if (node is null)
             {
@@ -105,7 +105,7 @@ namespace AD
             return ToPrefixStringRecursive(GetRoot());
         }
 
-        public string ToInfixStringRecursive(BinaryNode<T> node)
+        public static string ToInfixStringRecursive(BinaryNode<T> node)
         {
             if (node is null)
             {
@@ -123,7 +123,7 @@ namespace AD
             return ToInfixStringRecursive(GetRoot());
         }
 
-        public string ToPostfixStringRecursive(BinaryNode<T> node)
+        public static string ToPostfixStringRecursive(BinaryNode<T> node)
         {
             if (node is null)
             {
@@ -145,7 +145,7 @@ namespace AD
         // Interface methods : methods that have to be implemented for homework
         //----------------------------------------------------------------------
 
-        public int NumberOfLeavesRecursive(BinaryNode<T> node)
+        public static int NumberOfLeavesRecursive(BinaryNode<T> node)
         {
             if (node is null)
             {
@@ -169,7 +169,7 @@ namespace AD
             return NumberOfLeavesRecursive(GetRoot());
         }
 
-        public int NumberOfNodesWithOneChildRecursive(BinaryNode<T> node)
+        public static int NumberOfNodesWithOneChildRecursive(BinaryNode<T> node)
         {
             if (node is null)
             {
@@ -193,7 +193,7 @@ namespace AD
             return NumberOfNodesWithOneChildRecursive(GetRoot());
         }
 
-        public int NumberOfNodesWithTwoChildrenRecursive(BinaryNode<T> node)
+        public static int NumberOfNodesWithTwoChildrenRecursive(BinaryNode<T> node)
         {
             if (node is null)
             {
