@@ -105,17 +105,22 @@ namespace AD
             return ToPrefixStringRecursive(root);
         }
 
-        public string ToInfixString()
+        public string ToInfixStringRecursive(BinaryNode<T> node)
         {
-            if (IsEmpty())
+            if (node is null)
             {
                 return "NIL";
             }
 
-            return BinaryTreeWalker<T, string>.OperateOn(GetRoot(), (children, node) =>
-            {
-                return $"[ {children.Item1 ?? "NIL"} {node.GetData()} {children.Item2 ?? "NIL"} ]";
-            });
+            string left = ToInfixStringRecursive(node.left);
+            string right = ToInfixStringRecursive(node.right);
+
+            return $"[ {left} {node.GetData()} {right} ]";
+        }
+
+        public string ToInfixString()
+        {
+            return ToInfixStringRecursive(root);
         }
 
         public string ToPostfixString()
