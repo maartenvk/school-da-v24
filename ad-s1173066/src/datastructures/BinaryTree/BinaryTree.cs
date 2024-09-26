@@ -187,23 +187,28 @@ namespace AD
             return NumberOfNodesWithOneChildRecursive(root);
         }
 
-        public int NumberOfNodesWithTwoChildren()
+        public int NumberOfNodesWithTwoChildrenRecursive(BinaryNode<T> node)
         {
-            if (IsEmpty())
+            if (node is null)
             {
                 return 0;
             }
 
-            return BinaryTreeWalker<T, int>.OperateOn(GetRoot(), (children, node) =>
+            int twoChildren = 0;
+            if (node.HasLeft() && node.HasRight())
             {
-                int total = children.Item1 + children.Item2;
-                if (node.HasLeft() && node.HasRight())
-                {
-                    return total + 1;
-                }
+                twoChildren = 1;
+            }
 
-                return total;
-            });
+            int left = NumberOfNodesWithTwoChildrenRecursive(node.left);
+            int right = NumberOfNodesWithTwoChildrenRecursive(node.right);
+
+            return twoChildren + left + right;
+        }
+
+        public int NumberOfNodesWithTwoChildren()
+        {
+            return NumberOfNodesWithTwoChildrenRecursive(root);
         }
     }
 }
