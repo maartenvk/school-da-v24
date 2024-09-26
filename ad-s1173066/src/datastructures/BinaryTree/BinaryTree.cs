@@ -145,22 +145,28 @@ namespace AD
         // Interface methods : methods that have to be implemented for homework
         //----------------------------------------------------------------------
 
-        public int NumberOfLeaves()
+        public int NumberOfLeavesRecursive(BinaryNode<T> node)
         {
-            if (IsEmpty())
+            if (node is null)
             {
                 return 0;
             }
 
-            return BinaryTreeWalker<T, int>.OperateOn(GetRoot(), (children, node) =>
+            int leaf = 0;
+            if (node.IsLeaf())
             {
-                if (node.IsLeaf())
-                {
-                    return 1;
-                }
+                leaf = 1;
+            }
 
-                return children.Item1 + children.Item2;
-            });
+            int left = NumberOfLeavesRecursive(node.GetLeft());
+            int right = NumberOfLeavesRecursive(node.GetRight());
+
+            return leaf + left + right;
+        }
+
+        public int NumberOfLeaves()
+        {
+            return NumberOfLeavesRecursive(GetRoot());
         }
 
         public int NumberOfNodesWithOneChildRecursive(BinaryNode<T> node)
