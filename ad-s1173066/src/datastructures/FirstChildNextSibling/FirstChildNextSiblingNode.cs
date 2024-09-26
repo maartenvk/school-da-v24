@@ -37,12 +37,12 @@ namespace AD
 
         public bool hasChild()
         {
-            return !(firstChild is null);
+            return firstChild is not null;
         }
 
         public bool hasNextSibling()
         {
-            return !(nextSibling is null);
+            return nextSibling is not null;
         }
     }
 }
