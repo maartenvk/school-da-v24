@@ -42,38 +42,22 @@ namespace AD
             return SizeRecursive(root);
         }
 
-        private int HeightRecursive(BinaryNode<T> node, int height)
+        public int HeightRecursive(BinaryNode<T> node, int height)
         {
-            int finalHeight = height;
-
-            if (node.HasLeft())
-            {
-                int leftHeight = HeightRecursive(node.GetLeft(), height + 1);
-                finalHeight = Math.Max(finalHeight, leftHeight);
-            }
-
-            if (node.HasRight())
-            {
-                int rightHeight = HeightRecursive(node.GetRight(), height + 1);
-                finalHeight = Math.Max(finalHeight, rightHeight);
-            }
-
-            return finalHeight;
-        }
-
-        public int Height()
-        {
-            if (IsEmpty())
+            if (node is null)
             {
                 return -1;
             }
 
-            return BinaryTreeWalker<T, int>.OperateOn(GetRoot(), (children, node) =>
-            {
-                return Math.Max(Math.Max(1 + children.Item1, 1 + children.Item2), 1);
-            }) - 1;
+            return Math.Max(height, Math.Max(
+                HeightRecursive(node.left, height + 1),
+                HeightRecursive(node.right, height + 1)
+            ));
+        }
 
-            //return HeightRecursive(root, 0);
+        public int Height()
+        {
+            return HeightRecursive(root, 0);
         }
 
         public void MakeEmpty()
