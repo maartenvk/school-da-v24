@@ -80,7 +80,72 @@ namespace AD
 
         public void Remove(T x)
         {
-            throw new System.NotImplementedException();
+            BinaryNode<T> parent = GetRoot();
+            BinaryNode<T> node = GetRoot();
+
+            while (true)
+            {
+                if (node is null)
+                {
+                    throw new BinarySearchTreeElementNotFoundException();
+                }
+
+                int comparison = x.CompareTo(node.GetData());
+                if (comparison == 0)
+                {
+                    break; // Found
+                }
+
+                parent = node;
+                if (comparison < 0)
+                {
+                    node = node.GetLeft();
+                }
+
+                if (comparison > 0)
+                {
+                    node = node.GetRight();
+                }
+            }
+
+            bool isRight = parent.GetRight() == node;
+            if (node.IsLeaf())
+            {
+                if (isRight)
+                {
+                    parent.right = null;
+                }
+                else
+                {
+                    parent.left = null;
+                }
+
+                if (GetRoot() == node)
+                {
+                    root = null;
+                }
+
+                return;
+            }
+
+            // this node only has 1 child
+            if (node.HasLeft() ^ node.HasRight())
+            {
+                BinaryNode<T> child = node.HasLeft() ? node.GetLeft() : node.GetRight();
+                if (isRight)
+                {
+                    parent.right = child;
+                }
+                else
+                {
+                    parent.left = child;
+                }
+
+                return;
+            }
+
+            // TWO children
+            // todo
         }
 
         public static string InOrderRecursive(BinaryNode<T> node)
