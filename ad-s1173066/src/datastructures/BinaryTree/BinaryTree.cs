@@ -87,17 +87,22 @@ namespace AD
             root = new(rootItem, left, right);
         }
 
-        public string ToPrefixString()
+        public string ToPrefixStringRecursive(BinaryNode<T> node)
         {
-            if (IsEmpty())
+            if (node is null)
             {
                 return "NIL";
             }
 
-            return BinaryTreeWalker<T, string>.OperateOn(GetRoot(), (children, node) =>
-            {
-                return $"[ {node.GetData()} {children.Item1 ?? "NIL"} {children.Item2 ?? "NIL"} ]";
-            });
+            string left = ToPrefixStringRecursive(node.left);
+            string right = ToPrefixStringRecursive(node.right);
+
+            return $"[ {node.GetData()} {left} {right} ]";
+        }
+
+        public string ToPrefixString()
+        {
+            return ToPrefixStringRecursive(root);
         }
 
         public string ToInfixString()
