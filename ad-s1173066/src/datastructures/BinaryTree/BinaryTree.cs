@@ -27,51 +27,37 @@ namespace AD
             return root;
         }
 
-        public int Size()
+        public static int SizeRecursive(BinaryNode<T> node)
         {
-            if (IsEmpty())
+            if (node is null)
             {
                 return 0;
             }
 
-            return BinaryTreeWalker<T, int>.OperateOn(GetRoot(), (children, node) =>
-            {
-                return 1 + children.Item1 + children.Item2;
-            });
+            return 1 + SizeRecursive(node.GetLeft()) + SizeRecursive(node.GetRight());
         }
 
-        private int HeightRecursive(BinaryNode<T> node, int height)
+        public int Size()
         {
-            int finalHeight = height;
-
-            if (node.HasLeft())
-            {
-                int leftHeight = HeightRecursive(node.GetLeft(), height + 1);
-                finalHeight = Math.Max(finalHeight, leftHeight);
-            }
-
-            if (node.HasRight())
-            {
-                int rightHeight = HeightRecursive(node.GetRight(), height + 1);
-                finalHeight = Math.Max(finalHeight, rightHeight);
-            }
-
-            return finalHeight;
+            return SizeRecursive(GetRoot());
         }
 
-        public int Height()
+        public static int HeightRecursive(BinaryNode<T> node, int height)
         {
-            if (IsEmpty())
+            if (node is null)
             {
                 return -1;
             }
 
-            return BinaryTreeWalker<T, int>.OperateOn(GetRoot(), (children, node) =>
-            {
-                return Math.Max(Math.Max(1 + children.Item1, 1 + children.Item2), 1);
-            }) - 1;
+            return Math.Max(height, Math.Max(
+                HeightRecursive(node.GetLeft(), height + 1),
+                HeightRecursive(node.GetRight(), height + 1)
+            ));
+        }
 
-            //return HeightRecursive(root, 0);
+        public int Height()
+        {
+            return HeightRecursive(GetRoot(), 0);
         }
 
         public void MakeEmpty()
@@ -86,108 +72,149 @@ namespace AD
 
         public void Merge(T rootItem, BinaryTree<T> t1, BinaryTree<T> t2)
         {
-            BinaryNode<T> rootLeft = t1 is null ? null : t1.GetRoot(),
-                         rootRight = t2 is null ? null : t2.GetRoot();
+            BinaryNode<T> left = null, right = null;
 
-            root = new(rootItem, rootLeft, rootRight);
+            if (t1 is not null)
+            {
+                left = t1.GetRoot();
+            }
+
+            if (t2 is not null)
+            {
+                right = t2.GetRoot();
+            }
+
+            root = new(rootItem, left, right);
+        }
+
+        public static string ToPrefixStringRecursive(BinaryNode<T> node)
+        {
+            if (node is null)
+            {
+                return "NIL";
+            }
+
+            string left = ToPrefixStringRecursive(node.GetLeft());
+            string right = ToPrefixStringRecursive(node.GetRight());
+
+            return $"[ {node.GetData()} {left} {right} ]";
         }
 
         public string ToPrefixString()
         {
-            if (IsEmpty())
+            return ToPrefixStringRecursive(GetRoot());
+        }
+
+        public static string ToInfixStringRecursive(BinaryNode<T> node)
+        {
+            if (node is null)
             {
                 return "NIL";
             }
 
-            return BinaryTreeWalker<T, string>.OperateOn(GetRoot(), (children, node) =>
-            {
-                return $"[ {node.GetData()} {children.Item1 ?? "NIL"} {children.Item2 ?? "NIL"} ]";
-            });
+            string left = ToInfixStringRecursive(node.GetLeft());
+            string right = ToInfixStringRecursive(node.GetRight());
+
+            return $"[ {left} {node.GetData()} {right} ]";
         }
 
         public string ToInfixString()
         {
-            if (IsEmpty())
+            return ToInfixStringRecursive(GetRoot());
+        }
+
+        public static string ToPostfixStringRecursive(BinaryNode<T> node)
+        {
+            if (node is null)
             {
                 return "NIL";
             }
 
-            return BinaryTreeWalker<T, string>.OperateOn(GetRoot(), (children, node) =>
-            {
-                return $"[ {children.Item1 ?? "NIL"} {node.GetData()} {children.Item2 ?? "NIL"} ]";
-            });
+            string left = ToPostfixStringRecursive(node.GetLeft());
+            string right = ToPostfixStringRecursive(node.GetRight());
+
+            return $"[ {left} {right} {node.GetData()} ]";
         }
 
         public string ToPostfixString()
         {
-            if (IsEmpty())
-            {
-                return "NIL";
-            }
-
-            return BinaryTreeWalker<T, string>.OperateOn(GetRoot(), (children, node) =>
-            {
-                return $"[ {children.Item1 ?? "NIL"} {children.Item2 ?? "NIL"} {node.GetData()} ]";
-            });
+            return ToPostfixStringRecursive(GetRoot());
         }
 
         //----------------------------------------------------------------------
         // Interface methods : methods that have to be implemented for homework
         //----------------------------------------------------------------------
 
-        public int NumberOfLeaves()
+        public static int NumberOfLeavesRecursive(BinaryNode<T> node)
         {
-            if (IsEmpty())
+            if (node is null)
             {
                 return 0;
             }
 
-            return BinaryTreeWalker<T, int>.OperateOn(GetRoot(), (children, node) =>
+            int leaf = 0;
+            if (node.IsLeaf())
             {
-                if (node.IsLeaf())
-                {
-                    return 1;
-                }
+                leaf = 1;
+            }
 
-                return children.Item1 + children.Item2;
-            });
+            int left = NumberOfLeavesRecursive(node.GetLeft());
+            int right = NumberOfLeavesRecursive(node.GetRight());
+
+            return leaf + left + right;
+        }
+
+        public int NumberOfLeaves()
+        {
+            return NumberOfLeavesRecursive(GetRoot());
+        }
+
+        public static int NumberOfNodesWithOneChildRecursive(BinaryNode<T> node)
+        {
+            if (node is null)
+            {
+                return 0;
+            }
+
+            int singleChild = 0;
+            if (node.HasLeft() ^ node.HasRight())
+            {
+                singleChild = 1;
+            }
+
+            int left = NumberOfNodesWithOneChildRecursive(node.GetLeft());
+            int right = NumberOfNodesWithOneChildRecursive(node.GetRight());
+
+            return singleChild + left + right;
         }
 
         public int NumberOfNodesWithOneChild()
         {
-            if (IsEmpty())
+            return NumberOfNodesWithOneChildRecursive(GetRoot());
+        }
+
+        public static int NumberOfNodesWithTwoChildrenRecursive(BinaryNode<T> node)
+        {
+            if (node is null)
             {
                 return 0;
             }
 
-            return BinaryTreeWalker<T, int>.OperateOn(GetRoot(), (children, node) =>
+            int twoChildren = 0;
+            if (node.HasLeft() && node.HasRight())
             {
-                if (node.HasLeft() ^ node.HasRight())
-                {
-                    return 1;
-                }
+                twoChildren = 1;
+            }
 
-                return children.Item1 + children.Item2;
-            });
+            int left = NumberOfNodesWithTwoChildrenRecursive(node.GetLeft());
+            int right = NumberOfNodesWithTwoChildrenRecursive(node.GetRight());
+
+            return twoChildren + left + right;
         }
 
         public int NumberOfNodesWithTwoChildren()
         {
-            if (IsEmpty())
-            {
-                return 0;
-            }
-
-            return BinaryTreeWalker<T, int>.OperateOn(GetRoot(), (children, node) =>
-            {
-                int total = children.Item1 + children.Item2;
-                if (node.HasLeft() && node.HasRight())
-                {
-                    return total + 1;
-                }
-
-                return total;
-            });
+            return NumberOfNodesWithTwoChildrenRecursive(GetRoot());
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 
 namespace AD
 {
@@ -11,31 +12,22 @@ namespace AD
             return root;
         }
 
-        private int SizeRecursive(FirstChildNextSiblingNode<T> node)
+        public static int SizeRecursive(IFirstChildNextSiblingNode<T> node)
         {
-            int totalSize = 1;
-
-            if (node.hasChild())
-            {
-                totalSize += SizeRecursive(node.GetFirstChild());
-            }
-
-            if (node.hasNextSibling())
-            {
-                totalSize += SizeRecursive(node.GetNextSibling());
-            }
-
-            return totalSize;
-        }
-
-        public int Size()
-        {
-            if (root == null)
+            if (node is null)
             {
                 return 0;
             }
 
-            return SizeRecursive(root);
+            int firstChildSize = SizeRecursive(node.GetFirstChild());
+            int nextSiblingSize = SizeRecursive(node.GetNextSibling());
+
+            return 1 + firstChildSize + nextSiblingSize;
+        }
+
+        public int Size()
+        {
+            return SizeRecursive(GetRoot());
         }
 
         public void PrintPreOrder()
@@ -43,33 +35,34 @@ namespace AD
             Console.WriteLine(ToString());
         }
 
-        private string ToStringRecursive(FirstChildNextSiblingNode<T> node)
+        public static string ToStringRecursive(IFirstChildNextSiblingNode<T> node)
         {
-            string output = $"{node.GetData()}";
-
-            if (node.hasChild())
-            {
-                string childOutput = ToStringRecursive(node.GetFirstChild());
-                output += $",FC({childOutput})";
-            }
-
-            if (node.hasNextSibling())
-            {
-                string siblingOutput = ToStringRecursive(node.GetNextSibling());
-                output += $",NS({siblingOutput})";
-            }
-
-            return output;
-        }
-
-        public override string ToString()
-        {
-            if (Size() == 0)
+            if (node is null)
             {
                 return "NIL";
             }
 
-            return ToStringRecursive(root);
+            StringBuilder sb = new(node.GetData().ToString());
+
+            string childOutput = ToStringRecursive(node.GetFirstChild());
+            string siblingOutput = ToStringRecursive(node.GetNextSibling());
+
+            if (childOutput != "NIL")
+            {
+                sb.Append($",FC({childOutput})");
+            }
+
+            if (siblingOutput != "NIL")
+            {
+                sb.Append($",NS({siblingOutput})");
+            }
+
+            return sb.ToString();
+        }
+
+        public override string ToString()
+        {
+            return ToStringRecursive(GetRoot());
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 
 namespace AD
@@ -15,7 +15,7 @@ namespace AD
         //----------------------------------------------------------------------
         public PriorityQueue()
         {
-            throw new System.NotImplementedException();
+            array = new T[DEFAULT_CAPACITY];
         }
 
         //----------------------------------------------------------------------
@@ -23,22 +23,37 @@ namespace AD
         //----------------------------------------------------------------------
         public int Size()
         {
-            throw new System.NotImplementedException();
+            return size;
         }
 
         public void Clear()
         {
-            throw new System.NotImplementedException();
+            size = 0;
+        }
+
+        public bool IsEmpty()
+        {
+            return size == 0;
         }
 
         public void Add(T x)
         {
+            if (size >= DEFAULT_CAPACITY)
+            {
+                throw new System.Exception("Already at full capacity");
+            }
+
             throw new System.NotImplementedException();
         }
 
         // Removes the smallest item in the priority queue
         public T Remove()
         {
+            if (IsEmpty())
+            {
+                throw new PriorityQueueEmptyException();
+            }
+
             throw new System.NotImplementedException();
         }
 
@@ -56,6 +71,5 @@ namespace AD
         {
             throw new System.NotImplementedException();
         }
-
     }
 }

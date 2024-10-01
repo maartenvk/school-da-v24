@@ -1,0 +1,57 @@
+\documentclass[12pt,a4paper]{article}
+\title{Les 4 huiswerk}
+\author{Maarten}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ffcode}
+\begin{document}
+\maketitle
+
+\section{Opgave 1}
+\begin{itemize}
+\item[a.] pivot $p$ = mid(4,7,2) = 4
+\item[b.] \{4i, 9, 5, 1, 2, 8, 3, 6j, 7\}
+\item[] \{7i, 9, 5, 1, 2, 8, 3, 6j, 4\} swap pivot
+\item[] \{7i, 9, 5, 1, 2, 8, 3j, 6, 4\} $i>p$
+\item[] \{3, 9i, 5, 1, 2, 8, 7j, 6, 4\} swap $i,j$
+\item[] \{3, 9i, 5, 1, 2j, 8, 7, 6, 4\} $i>p$
+\item[] \{3, 2, 5i, 1j, 9, 8, 7, 6, 4\} swap $i,j$
+\item[] \{3, 2, 5i, 1j, 9, 8, 7, 6, 4\} $i>p$
+\item[] \{3, 2, 1, 5ij, 9, 8, 7, 6, 4\} swap $p,i$
+\item[] \{3, 2, 1, 4, 9, 8, 7, 6, 5\}
+\end{itemize}
+
+\section{Opgave 2}
+\begin{itemize}
+\item[a.] pivot $p$ = mid(7,2,6) = 6
+\item[b.] \{7i, 5, 8, 1, 6, 3, 4, 9j, 2\}
+\item[] \{7i, 5, 8, 1, 2, 3, 4, 9j, 6\} swap $p$
+\item[] \{7i, 5, 8, 1, 2, 3, 4, 9j, 6\} $i>p$
+\item[] \{7i, 5, 8, 1, 2, 3, 4j, 9, 6\} swap $i,j$
+\item[] \{4, 5i, 8, 1, 2, 3, 7j, 9, 6\}
+\item[] \{4, 5, 8i, 1, 2, 3, 7j, 9, 6\} $i>p$
+\item[] \{4, 5, 8i, 1, 2, 3j, 7, 9, 6\}
+\item[] \{4, 5, 3, 1i, 2, 8j, 7, 9, 6\} swap $i,j$
+\item[] \{4, 5, 3, 1, 2, 8ij, 7, 9, 6\} swap $p,i$
+\item[] \{4, 5, 3, 1, 2, 6ij, 7, 9, 8\} swap $p,i$
+\item[] \{4, 5, 3, 1, 2, 6ij, 7, 9, 8\}
+\end{itemize}
+
+\section{Opgave 3}
+\begin{itemize}
+\item[a.] $O(n^2)$
+\item[b.] $O(\log_2 n)$
+\item[c.] $O(\log_2 n)$
+\end{itemize}
+
+\section{Opgave 4}
+\begin{itemize}
+\item[a.] prefix: {*,6,-,8,3}
+\item[] postfix: {6,8,3,-,*}
+\item[b.] prefix: {/,-,7,5,+,4,6}
+\item[] postfix: {7,5,-,4,6,+,/}
+\item[c.] prefix: {+,*,a,-,b,c,/,6,d}
+\item[] postfix: {a,b,c,-,*,6,d,/,+}
+\end{itemize}
+
+\end{document}
