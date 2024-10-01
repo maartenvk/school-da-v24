@@ -17,7 +17,7 @@ namespace AD
 
         public Graph()
         {
-            throw new System.NotImplementedException();
+            vertexMap = new();
         }
 
 
@@ -32,7 +32,7 @@ namespace AD
         /// <param name="name">The name of the new vertex</param>
         public void AddVertex(string name)
         {
-            throw new System.NotImplementedException();
+            vertexMap.Add(name, new Vertex(name));
         }
 
 
@@ -44,7 +44,7 @@ namespace AD
         /// <returns>The vertex withe the given name</returns>
         public Vertex GetVertex(string name)
         {
-            throw new System.NotImplementedException();
+            return vertexMap[name];
         }
 
 
@@ -58,7 +58,11 @@ namespace AD
         /// <param name="cost">cost of the edge</param>
         public void AddEdge(string source, string dest, double cost = 1)
         {
-            throw new System.NotImplementedException();
+            Vertex src = GetVertex(source);
+            Vertex dst = GetVertex(dest);
+            Edge edge = new(dst, cost);
+
+            src.adj.AddLast(edge);
         }
 
 
@@ -68,7 +72,11 @@ namespace AD
         /// </summary>
         public void ClearAll()
         {
-            throw new System.NotImplementedException();
+            foreach (var vertex in vertexMap)
+            {
+                vertex.Value.distance = INFINITY;
+                vertex.Value.prev = null;
+            }
         }
 
         /// <summary>
