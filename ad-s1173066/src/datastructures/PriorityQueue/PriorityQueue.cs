@@ -9,9 +9,8 @@ namespace AD
     public partial class PriorityQueue<T> : IPriorityQueue<T>
         where T : IComparable<T>
     {
-        public const int DEFAULT_CAPACITY = 100;
+        public const int DEFAULT_CAPACITY = 2;
 
-        public int capacity;
         public int size;   // Number of elements in heap
         public T[] array;  // The heap array
 
@@ -20,8 +19,7 @@ namespace AD
         //----------------------------------------------------------------------
         public PriorityQueue()
         {
-            capacity = DEFAULT_CAPACITY;
-            array = new T[capacity + 1];
+            array = new T[DEFAULT_CAPACITY];
             size = 0;
         }
 
@@ -30,7 +28,7 @@ namespace AD
         //----------------------------------------------------------------------
         public int Size()
         {
-            return size;       
+            return size;
         }
 
         public void Clear()
@@ -53,6 +51,12 @@ namespace AD
             return index / 2;
         }
 
+        public (bool, bool) HasChildren(int index)
+        {
+            (int left, int right) child = ChildrenOf(index);
+            return (child.left < (1 + size), child.right < (1 + size));
+        }
+
         public (int, int) ChildrenOf(int index)
         {
             int childLeft = index * 2;
@@ -60,43 +64,92 @@ namespace AD
             return (childLeft, childRight);
         }
 
+        public void Swap(int lindex, int rindex)
+        {
+            (array[lindex], array[rindex]) = (array[rindex], array[lindex]);
+        }
+
         public void PercolateUp(int index)
         {
-
-        }
-
-        public void PercolateDown(int index)
-        {
-
-        }
-
-        protected void AssertBigEnough()
-        {
-            int newSize = size + 1;
-            if (newSize <= capacity)
+            // item to be moved => [index]
+            if (!HasParent(index))
             {
                 return;
             }
 
-            int newCapacity = capacity + capacity / 2; // GCC style
-            T[] newArray = new T[newCapacity + 1];
-            for (int i = 0; i < (capacity + 1); i++)
+            int parentIndex = ParentOf(index);
+            T parentValue = array[parentIndex];
+            T value = array[index];
+
+            if (value.CompareTo(parentValue) >= 0)
+            {
+                return;
+            }
+
+            Swap(parentIndex, index);
+            PercolateUp(parentIndex);
+        }
+
+        public void PercolateDown(int index)
+        {
+            (bool left, bool right) childExists = HasChildren(index);
+            if (!childExists.left && !childExists.right)
+            {
+                return;
+            }
+
+            T value = array[index];
+
+            (int left, int right) childIndex = ChildrenOf(index);
+
+            (T left, T right) childValue = (array[childIndex.left], default(T));
+            if (childExists.right)
+            {
+                childValue.right = array[childIndex.right];
+            }
+
+            bool leftIsSmaller = !childExists.right || childValue.right.CompareTo(childValue.left) < 0; ;
+
+            T comparisonValue = leftIsSmaller ? childValue.left : childValue.right;
+            if (value.CompareTo(comparisonValue) < 0)
+            {
+                return;
+            }
+
+            int swapIndex = leftIsSmaller ? childIndex.left : childIndex.right;
+            Swap(swapIndex, index);
+            PercolateDown(swapIndex);
+        }
+
+        protected void AssertEnoughSizeForAdding()
+        {
+            int capacity = array.Length;
+
+            // add offset (1) and new item (1)
+            int expectedCapacity = 1 + size + 1;
+            if (expectedCapacity <= capacity)
+            {
+                return;
+            }
+
+            int newCapacity = capacity * 2; // Clang style
+            T[] newArray = new T[newCapacity];
+            for (int i = 0; i < capacity; i++)
             {
                 newArray[i] = array[i];
             }
 
             array = newArray;
-            capacity = newCapacity;
         }
 
         public void Add(T x)
         {
-            AssertBigEnough();
+            AssertEnoughSizeForAdding();
 
-            array[size] = x;
+            array[1 + size] = x;
             size++;
 
-            PercolateUp();
+            PercolateUp(1 + (size - 1));
         }
 
         public T this[int index]
@@ -113,11 +166,11 @@ namespace AD
                 throw new PriorityQueueEmptyException();
             }
 
-            T result = array[0];
-            array[0] = array[size];
+            T result = array[1];
+            array[1] = array[1 + (size - 1)];
             size--;
 
-            PercolateDown(0);
+            PercolateDown(1);
             return result;
         }
 
@@ -127,9 +180,9 @@ namespace AD
 
         public void AddFreely(T x)
         {
-            AssertBigEnough();
+            AssertEnoughSizeForAdding();
 
-            array[size] = x;
+            array[1 + size] = x;
             size++;
         }
 
@@ -148,10 +201,9 @@ namespace AD
             StringBuilder sb = new();
             for (int i = 0; i < size; i++)
             {
-                sb.Append(array[i]);
+                sb.Append(array[1 + i]);
                 sb.Append(' ');
             }
-
 
             sb.Remove(sb.Length - 1, 1);
             return sb.ToString();
