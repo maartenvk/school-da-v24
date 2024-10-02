@@ -152,12 +152,6 @@ namespace AD
             PercolateUp(1 + (size - 1));
         }
 
-        public T this[int index]
-        {
-            get => array[index - 1];
-            set => array[index - 1] = value;
-        }
-
         // Removes the smallest item in the priority queue
         public T Remove()
         {
