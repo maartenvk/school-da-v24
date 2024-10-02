@@ -30,9 +30,37 @@ namespace AD
             return SizeRecursive(GetRoot());
         }
 
+        public static string PreOrderStringRecursive(IFirstChildNextSiblingNode<T> node, int depth)
+        {
+            if (node is null)
+            {
+                return "";
+            }
+
+            StringBuilder sb = new(new String('\t', depth));
+            sb.Append(node.GetData().ToString());
+
+            string childStr = PreOrderStringRecursive(node.GetFirstChild(), depth + 1);
+            string siblingStr = PreOrderStringRecursive(node.GetNextSibling(), depth);
+
+            if (childStr != "")
+            {
+                sb.Append('\n');
+                sb.Append(childStr);
+            }
+
+            if (siblingStr != "")
+            {
+                sb.Append('\n');
+                sb.Append(siblingStr);
+            }
+
+            return sb.ToString();
+        }
+
         public void PrintPreOrder()
         {
-            Console.WriteLine(ToString());
+            Console.WriteLine(PreOrderStringRecursive(GetRoot(), 0));
         }
 
         public static string ToStringRecursive(IFirstChildNextSiblingNode<T> node)
