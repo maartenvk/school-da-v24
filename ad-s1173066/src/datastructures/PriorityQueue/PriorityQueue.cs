@@ -9,7 +9,7 @@ namespace AD
     public partial class PriorityQueue<T> : IPriorityQueue<T>
         where T : IComparable<T>
     {
-        public const int DEFAULT_CAPACITY = 2;
+        public const int DEFAULT_CAPACITY = 100;
 
         public int size;   // Number of elements in heap
         public T[] array;  // The heap array
@@ -132,7 +132,7 @@ namespace AD
                 return;
             }
 
-            int newCapacity = capacity * 2; // Clang style
+            int newCapacity = capacity + capacity / 2; // GCC style
             T[] newArray = new T[newCapacity];
             for (int i = 0; i < capacity; i++)
             {
