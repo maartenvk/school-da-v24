@@ -90,7 +90,33 @@ namespace AD
         /// <param name="name">The name of the starting vertex</param>
         public void Unweighted(string name)
         {
-            throw new System.NotImplementedException();
+            GetVertex(name).distance = 0;
+
+            Queue<string> order = new();
+            order.Enqueue(name);
+
+            while (order.Count > 0)
+            {
+                string currentName = order.Dequeue();
+                Vertex current = GetVertex(currentName);
+                current.known = true;
+
+                // add current children
+                foreach (Edge e in current.GetAdjacents())
+                {
+                    Vertex dest = e.dest;
+                    double expectedDistance = current.distance + 1;
+
+                    if (dest.distance <= expectedDistance)
+                    {
+                        continue;
+                    }
+
+                    dest.prev = current;
+                    dest.distance = expectedDistance;
+                    order.Enqueue(dest.name);
+                }
+            }
         }
 
         /// <summary>
