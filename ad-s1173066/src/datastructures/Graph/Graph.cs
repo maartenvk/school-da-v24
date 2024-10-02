@@ -125,7 +125,34 @@ namespace AD
         /// <param name="name">The name of the starting vertex</param>
         public void Dijkstra(string name)
         {
-            throw new System.NotImplementedException();
+            Vertex start = GetVertex(name);
+            start.distance = 0;
+            start.prev = null;
+
+            PriorityQueue<Vertex> pq = new();
+            pq.Add(start);
+
+            while (!pq.IsEmpty())
+            {
+                Vertex v = pq.Remove();
+                v.known = true;
+
+                foreach (Edge e in v.GetAdjacents())
+                {
+                    double expectedDistance = e.cost + v.distance;
+
+                    Vertex dest = e.dest;
+                    if (dest.distance <= expectedDistance)
+                    {
+                        continue;
+                    }
+
+                    dest.prev = v;
+                    dest.distance = expectedDistance;
+
+                    pq.Add(dest);
+                }
+            }
         }
 
         //----------------------------------------------------------------------

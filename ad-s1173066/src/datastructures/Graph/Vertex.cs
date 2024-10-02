@@ -6,7 +6,7 @@ using System.Text;
 
 namespace AD
 {
-    public partial class Vertex : IVertex
+    public partial class Vertex : IVertex, IComparable<Vertex>
     {
         public string name;
         public LinkedList<Edge> adj;
@@ -101,6 +101,27 @@ namespace AD
             sb.Append(" ]");
 
             return sb.ToString();
+        }
+
+        int IComparable<Vertex>.CompareTo(AD.Vertex? other)
+        {
+            if (other is null)
+            {
+                return -1;
+            }
+
+            double a = distance;
+            double b = other.distance;
+            if (a > b)
+            {
+                return 1;
+            }
+            else if (a < b)
+            {
+                return -1;
+            }
+
+            return 0;
         }
     }
 }
