@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Text;
 
 namespace AD
 {
@@ -32,7 +32,7 @@ namespace AD
         /// <param name="name">The name of the new vertex</param>
         public void AddVertex(string name)
         {
-            vertexMap.Add(name, new Vertex(name));
+            vertexMap.TryAdd(name, new Vertex(name));
         }
 
 
@@ -44,7 +44,12 @@ namespace AD
         /// <returns>The vertex withe the given name</returns>
         public Vertex GetVertex(string name)
         {
-            return vertexMap[name];
+            if (vertexMap.TryGetValue(name, out Vertex vertex))
+            {
+                return vertex;
+            }
+
+            return vertexMap[name] = new(name);
         }
 
 
@@ -109,7 +114,19 @@ namespace AD
         /// <returns>The string representation of this Graph instance</returns>
         public override string ToString()
         {
-            throw new System.NotImplementedException();
+            StringBuilder sb = new();
+            foreach (string key in vertexMap.Keys.OrderBy(x => x))
+            {
+                sb.Append(vertexMap[key].ToString());
+                sb.Append('\n');
+            }
+
+            if (vertexMap.Count != 0)
+            {
+                sb.Remove(sb.Length - 1, 1);
+            }
+
+            return sb.ToString();
         }
 
 

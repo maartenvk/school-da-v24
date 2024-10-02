@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 
 namespace AD
@@ -24,7 +25,9 @@ namespace AD
         /// <param name="name">The name of the new vertex</param>
         public Vertex(string name)
         {
-            throw new System.NotImplementedException();
+            this.name = name;
+            adj = new();
+            Reset();
         }
 
 
@@ -34,31 +37,34 @@ namespace AD
 
         public string GetName()
         {
-            throw new System.NotImplementedException();
+            return name;
         }
+
         public LinkedList<Edge> GetAdjacents()
         {
-            throw new System.NotImplementedException();
+            return adj;
         }
 
         public double GetDistance()
         {
-            throw new System.NotImplementedException();
+            return distance;
         }
 
         public Vertex GetPrevious()
         {
-            throw new System.NotImplementedException();
+            return prev;
         }
 
         public bool GetKnown()
         {
-            throw new System.NotImplementedException();
+            return known;
         }
 
         public void Reset()
         {
-            throw new System.NotImplementedException();
+            prev = null;
+            distance = Graph.INFINITY;
+            known = false;
         }
 
 
@@ -72,10 +78,29 @@ namespace AD
         ///    <para>Adjecents are ordered ascending by name. If no distance is
         ///    calculated yet, the distance and the parantheses are omitted.</para>
         /// </summary>
-        /// <returns>The string representation of this Graph instance</returns> 
+        /// <returns>The string representation of this Graph instance</returns>
         public override string ToString()
         {
-            throw new System.NotImplementedException();
+            StringBuilder sb = new(name);
+            if (distance != Graph.INFINITY)
+            {
+                sb.Append(" (");
+                sb.Append(distance);
+                sb.Append(") ");
+            }
+
+            sb.Append("[");
+            foreach (Edge e in adj.OrderBy(x => x.dest.name))
+            {
+                sb.Append(' ');
+                sb.Append(e.dest.name);
+                sb.Append(" (");
+                sb.Append(e.cost);
+                sb.Append(')');
+            }
+            sb.Append(" ]");
+
+            return sb.ToString();
         }
     }
 }
