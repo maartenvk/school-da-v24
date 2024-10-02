@@ -108,7 +108,7 @@ namespace AD
                 childValue.right = array[childIndex.right];
             }
 
-            bool leftIsSmaller = !childExists.right || childValue.right.CompareTo(childValue.left) < 0; ;
+            bool leftIsSmaller = !childExists.right || (childValue.left.CompareTo(childValue.right) < 0);
 
             T comparisonValue = leftIsSmaller ? childValue.left : childValue.right;
             if (value.CompareTo(comparisonValue) < 0)
