@@ -182,7 +182,11 @@ namespace AD
 
         public void BuildHeap()
         {
-            throw new System.NotImplementedException();
+            int startingPosition = 1 + (size - 1);
+            for (int i = startingPosition; i >= 1; i--)
+            {
+                PercolateDown(i);
+            }
         }
 
         public override string ToString()
