@@ -77,10 +77,10 @@ namespace AD
         /// </summary>
         public void ClearAll()
         {
-            foreach (var vertex in vertexMap)
+            foreach (string name in vertexMap.Keys)
             {
-                vertex.Value.distance = INFINITY;
-                vertex.Value.prev = null;
+                Vertex v = GetVertex(name);
+                v.Reset();
             }
         }
 
@@ -191,8 +191,52 @@ namespace AD
 
         public bool IsConnected()
         {
-            throw new System.NotImplementedException();
+            foreach (string source in vertexMap.Keys)
+            {
+                Unweighted(source);
+
+                foreach (string name in vertexMap.Keys)
+                {
+                    Vertex v = GetVertex(name);
+                    if (!v.known)
+                    {
+                        return false;
+                    }
+                }
+
+                ClearAll();
+            }
+
+            return true;
         }
 
+        public List<Vertex> ShortestRoute(string from, string to, bool doSearch = true, bool useDijkstra = false)
+        {
+            List<Vertex> route = new();
+
+            if (doSearch)
+            {
+                ClearAll();
+                if (useDijkstra)
+                {
+                    Dijkstra(from);
+                }
+                else
+                {
+                    Unweighted(from);
+                }
+            }
+
+            Vertex v = GetVertex(to);
+            while (v is not null)
+            {
+                route.Add(v);
+                v = v.prev;
+            }
+
+            ClearAll();
+            route.Reverse();
+            return route;
+        }
     }
 }

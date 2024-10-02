@@ -1,4 +1,6 @@
-﻿namespace AD
+using System.Collections.Generic;
+
+namespace AD
 {
     class Program
     {
@@ -94,6 +96,28 @@
             System.Console.WriteLine(graph14_1);
             System.Console.WriteLine(unweighted);
             System.Console.WriteLine(weighted);
-       }
+
+            System.Diagnostics.Stopwatch sw = new();
+            sw.Start();
+            bool graph14_1_con = graph14_1.IsConnected();
+            bool unweighted_con = unweighted.IsConnected();
+            bool weighted_con = weighted.IsConnected();
+            sw.Stop();
+
+            System.Console.WriteLine($"Elapsed to calculate is connected: {sw.Elapsed}");
+
+            System.Console.WriteLine("graph14_1 is connected:" + graph14_1_con);
+            System.Console.WriteLine("unweighted is connected:" + unweighted_con);
+            System.Console.WriteLine("weighted is connected:" + weighted_con);
+
+            System.Console.Write("Shortest path from A to H on weighted: ");
+
+            List<Vertex> route = weighted.ShortestRoute("A", "H", doSearch: true, useDijkstra: true);
+            foreach (Vertex v in route)
+            {
+                System.Console.Write(v.GetName() + ' ');
+            }
+            System.Console.WriteLine();
+        }
     }
 }
