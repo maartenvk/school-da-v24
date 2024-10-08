@@ -29,7 +29,7 @@ namespace AD
             return FibonacciRecursiveInternal(n);
         }
 
-        private static ICache<int, long> FibonacciRecursive__cache = new LRUCache<int, long>(26);
+        private static ICache<int, long> FibonacciRecursive__cache = new LRUCache<int, long>(50);
         public static Func<int, long> FibonacciRecursiveCached = Caching.MakeCached<int, long>((int n) =>
         {
             calls++;
@@ -62,6 +62,7 @@ namespace AD
                 long tmp = result;
                 result += prev;
                 prev = tmp;
+                calls += 1;
             }
 
             return result;
@@ -82,12 +83,17 @@ namespace AD
             {
                 System.Console.WriteLine("          Fibonacci({0,2}) = {1,8} ({2,9} calls)", n, FibonacciRecursive(n), calls);
             }
+
+
             System.Console.WriteLine("Recursief (CACHED):");
             calls = 0;
+
             for (int n = 1; n <= MAX; n++)
             {
                 System.Console.WriteLine("          Fibonacci({0,2}) = {1,8} ({2,9} calls)", n, FibonacciRecursiveCached(n), calls);
             }
+
+
             System.Console.WriteLine("Iteratief:");
             for (int n = 1; n <= MAX; n++)
             {
