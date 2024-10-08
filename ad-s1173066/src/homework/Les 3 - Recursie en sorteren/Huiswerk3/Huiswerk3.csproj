@@ -9,6 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\..\..\caching\ICache.cs" Link="sorters\ICache.cs" />
+    <Compile Include="..\..\..\caching\LRUCache.cs" Link="sorters\LRUCache.cs" />
     <Compile Include="..\..\..\algorithms\sorters\InsertionSort.cs" Link="sorters\InsertionSort.cs" />
     <Compile Include="..\..\..\algorithms\sorters\MergeSort.cs" Link="sorters\MergeSort.cs" />
     <Compile Include="..\..\..\algorithms\sorters\QuickSort.cs" Link="sorters\QuickSort.cs" />
