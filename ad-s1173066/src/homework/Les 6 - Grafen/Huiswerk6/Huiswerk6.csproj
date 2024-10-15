@@ -16,6 +16,8 @@
     <Compile Include="..\..\..\datastructures\Graph\Vertex.cs" Link="Graph\Vertex.cs" />
     <Compile Include="..\..\..\datastructures\PriorityQueue\IPriorityQueue.cs" Link="PriorityQueue\IPriorityQueue.cs" />
     <Compile Include="..\..\..\datastructures\PriorityQueue\PriorityQueue.cs" Link="PriorityQueue\PriorityQueue.cs" />
+    <Compile Include="..\..\..\hashing\IMap.cs" Link="Hashing/IMap.cs" />
+    <Compile Include="..\..\..\hashing\Map.cs" Link="Hashing/Map.cs" />
   </ItemGroup>
 
   <ItemGroup>

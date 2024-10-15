@@ -12,6 +12,7 @@
   <ItemGroup>
     <Compile Include="..\..\..\datastructures\Graph\GraphBuilder.cs" Link="GraphBuilder.cs" />
     <Compile Include="..\..\..\datastructures\Graph\GraphTests.cs" Link="GraphTests.cs" />
+    <Compile Include="..\..\..\hashing\MapTests.cs" Link="MapTests.cs" />
     <Compile Include="..\..\..\utils\TestUtils.cs" Link="TestUtils.cs" />
   </ItemGroup>
 
