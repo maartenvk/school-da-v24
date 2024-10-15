@@ -122,4 +122,14 @@ public class Map<K, V> : IMap<K, V>
 
         return n;
     }
+
+    public int Count()
+    {
+        return size;
+    }
+
+    public int Capacity()
+    {
+        return keys.Length;
+    }
 }
