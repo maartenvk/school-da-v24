@@ -61,4 +61,20 @@ public class MapTests
         Assert.That(map.Capacity(), Is.EqualTo(11)); // next prime
         Assert.That(map.Count(), Is.EqualTo(5));
     }
+
+    [Test]
+    public void Map_Big()
+    {
+        IMap<int, int> map = new Map<int, int>();
+
+        for (int i = 0; i < 101; i++)
+        {
+            map[i] = i;
+        }
+
+        for (int i = 0; i < 101; i++)
+        {
+            Assert.That(map[i], Is.EqualTo(i));
+        }
+    }
 }
